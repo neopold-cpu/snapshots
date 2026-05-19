@@ -84,34 +84,32 @@
     }
     .hero h1 { margin: 0; font-size: 20px; font-weight: 600; }
     .hero p { margin: 2px 0 0 0; font-size: 13px; opacity: 0.85; }
-
     .class-bar {
       display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
-      margin-bottom: 14px;
-      padding: 8px;
+      margin-bottom: 14px; padding: 8px;
       background: var(--color-surface-alt);
       border-radius: var(--radius-lg);
     }
     .class-tab {
-      padding: 9px 14px;
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      font-size: 14px;
-      background: transparent;
-      border: 1px solid transparent;
-      user-select: none;
-      transition: all 0.15s;
-      min-height: 38px;
-      display: flex; align-items: center;
+      padding: 9px 14px; border-radius: var(--radius-md);
+      cursor: pointer; font-size: 14px;
+      background: transparent; border: 1px solid transparent;
+      user-select: none; transition: all 0.15s;
+      min-height: 38px; display: flex; align-items: center; gap: 6px;
     }
     .class-tab:hover { background: var(--color-surface); }
     .class-tab.active {
       background: var(--color-surface);
       border-color: var(--color-border-strong);
-      font-weight: 600;
-      color: var(--color-primary);
+      font-weight: 600; color: var(--color-primary);
     }
-
+    .class-tab .badge {
+      font-size: 10px; padding: 1px 6px;
+      background: var(--color-surface-alt); border-radius: 999px;
+      color: var(--color-text-tertiary); font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .class-tab.active .badge { background: var(--color-primary); color: white; }
     .view-tabs {
       display: flex; gap: 4px;
       margin: 6px 0 16px 0;
@@ -119,15 +117,11 @@
       flex-wrap: wrap;
     }
     .view-tab {
-      padding: 10px 14px;
-      cursor: pointer;
-      font-size: 14px;
-      border-bottom: 2px solid transparent;
-      user-select: none;
-      color: var(--color-text-secondary);
+      padding: 10px 14px; cursor: pointer;
+      font-size: 14px; border-bottom: 2px solid transparent;
+      user-select: none; color: var(--color-text-secondary);
       display: inline-flex; align-items: center; gap: 6px;
-      min-height: 44px;
-      transition: all 0.15s;
+      min-height: 44px; transition: all 0.15s;
       margin-bottom: -1px;
     }
     .view-tab:hover { color: var(--color-text); }
@@ -136,19 +130,13 @@
       border-bottom-color: var(--color-primary);
       font-weight: 600;
     }
-    .view-tab .icon { width: 18px; height: 18px; display: inline-block; }
-
     .btn {
-      padding: 10px 16px;
-      border-radius: var(--radius-md);
+      padding: 10px 16px; border-radius: var(--radius-md);
       border: 1px solid var(--color-border-strong);
       background: var(--color-surface);
-      cursor: pointer;
-      font-size: 14px;
-      font-family: inherit;
-      color: var(--color-text);
-      min-height: 44px;
-      transition: all 0.15s;
+      cursor: pointer; font-size: 14px;
+      font-family: inherit; color: var(--color-text);
+      min-height: 44px; transition: all 0.15s;
       display: inline-flex; align-items: center; gap: 6px;
       font-weight: 500;
     }
@@ -161,56 +149,41 @@
     .btn.danger { color: var(--color-danger-text); }
     .btn.small { padding: 6px 12px; font-size: 13px; min-height: 36px; }
     .btn.large { padding: 14px 22px; font-size: 16px; min-height: 52px; }
-
     .card {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 18px 20px;
-      margin-bottom: 14px;
+      padding: 18px 20px; margin-bottom: 14px;
       box-shadow: var(--shadow-sm);
     }
     .card.student-card { border-left: 4px solid var(--color-primary); }
-
     .empty-state {
-      text-align: center;
-      padding: 40px 20px;
+      text-align: center; padding: 40px 20px;
       color: var(--color-text-secondary);
       background: var(--color-surface-alt);
       border-radius: var(--radius-lg);
     }
     .empty-state .big-icon { font-size: 48px; color: var(--color-text-tertiary); margin-bottom: 8px; }
-
     .toast {
-      padding: 12px 16px;
-      border-radius: var(--radius-md);
-      background: var(--color-success-bg);
-      color: var(--color-success-text);
-      font-size: 14px;
-      margin: 10px 0;
+      padding: 12px 16px; border-radius: var(--radius-md);
+      background: var(--color-success-bg); color: var(--color-success-text);
+      font-size: 14px; margin: 10px 0;
       border-left: 4px solid var(--color-success-border);
       display: flex; align-items: center; gap: 8px;
     }
-
     .section-header {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--color-text-tertiary);
-      margin: 14px 0 8px 0;
-      font-weight: 600;
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--color-text-tertiary);
+      margin: 14px 0 8px 0; font-weight: 600;
     }
     .rating-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
     .rating-label {
-      font-size: 13px;
-      min-width: 130px;
-      color: var(--color-text-secondary);
-      font-weight: 600;
+      font-size: 13px; min-width: 130px;
+      color: var(--color-text-secondary); font-weight: 600;
       display: flex; align-items: center; gap: 6px;
     }
     .dim-icon {
-      width: 22px; height: 22px;
-      border-radius: 50%;
+      width: 22px; height: 22px; border-radius: 50%;
       display: inline-flex; align-items: center; justify-content: center;
       font-size: 11px;
     }
@@ -218,75 +191,54 @@
     .dim-icon.cognitive { background: #EEEDFE; color: #534AB7; }
     .dim-icon.emotional { background: #FBEAF0; color: #D4537E; }
     .dim-icon.social { background: #FAEEDA; color: #BA7517; }
+    .dim-icon.agentic { background: #E1F5EE; color: #0F6E56; }
     .rating-opt {
-      padding: 9px 13px;
-      border-radius: 999px;
+      padding: 9px 13px; border-radius: 999px;
       border: 1px solid var(--color-border-strong);
-      font-size: 13px;
-      cursor: pointer;
-      user-select: none;
-      background: var(--color-surface);
-      min-height: 36px;
+      font-size: 13px; cursor: pointer; user-select: none;
+      background: var(--color-surface); min-height: 36px;
       display: inline-flex; align-items: center;
       transition: all 0.12s;
     }
     .rating-opt:hover { background: var(--color-surface-alt); }
     .rating-opt.active {
-      background: var(--color-primary);
-      color: white;
-      border-color: var(--color-primary);
-      font-weight: 600;
+      background: var(--color-primary); color: white;
+      border-color: var(--color-primary); font-weight: 600;
     }
-
     .pill {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 9px 14px;
-      border-radius: 999px;
+      padding: 9px 14px; border-radius: 999px;
       border: 1px solid var(--color-border-strong);
-      font-size: 13px;
-      cursor: pointer;
-      background: var(--color-surface);
-      user-select: none;
-      min-height: 36px;
-      transition: all 0.12s;
+      font-size: 13px; cursor: pointer;
+      background: var(--color-surface); user-select: none;
+      min-height: 36px; transition: all 0.12s;
     }
     .pill:hover { background: var(--color-surface-alt); }
     .pill.pos.active { background: var(--color-success-bg); color: var(--color-success-text); border-color: var(--color-success-border); font-weight: 600; }
     .pill.neg.active { background: var(--color-danger-bg); color: var(--color-danger-text); border-color: var(--color-danger-border); font-weight: 600; }
     .pill.neu.active { background: var(--color-warning-bg); color: var(--color-warning-text); border-color: var(--color-warning-border); font-weight: 600; }
-
     textarea {
-      width: 100%; min-height: 90px;
-      padding: 12px;
+      width: 100%; min-height: 90px; padding: 12px;
       border-radius: var(--radius-md);
       border: 1px solid var(--color-border-strong);
-      background: var(--color-surface);
-      color: var(--color-text);
-      font-size: 16px;
-      resize: vertical;
-      font-family: inherit;
-      line-height: 1.5;
+      background: var(--color-surface); color: var(--color-text);
+      font-size: 16px; resize: vertical;
+      font-family: inherit; line-height: 1.5;
     }
     textarea:focus {
-      outline: none;
-      border-color: var(--color-primary);
+      outline: none; border-color: var(--color-primary);
       box-shadow: 0 0 0 3px rgba(15, 110, 86, 0.15);
     }
-
     .prompt-box {
       background: linear-gradient(135deg, #FAEEDA 0%, #FBEAF0 100%);
       border-radius: var(--radius-md);
-      padding: 14px 16px;
-      margin: 12px 0;
+      padding: 14px 16px; margin: 12px 0;
       border-left: 4px solid #BA7517;
     }
     .prompt-box .ptitle {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #633806;
-      margin-bottom: 6px;
-      font-weight: 700;
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.08em; color: #633806;
+      margin-bottom: 6px; font-weight: 700;
       display: flex; align-items: center; gap: 6px;
     }
     .prompt-box .pbody { color: #4A1B0C; font-size: 14px; line-height: 1.5; }
@@ -296,19 +248,14 @@
       font-size: 12px; font-weight: 600;
       display: inline-flex; align-items: center; gap: 4px;
     }
-
     .help-callout {
-      background: var(--color-info-bg);
-      color: var(--color-info-text);
-      border-radius: var(--radius-md);
-      padding: 10px 14px;
-      font-size: 13px;
-      margin: 8px 0 14px 0;
+      background: var(--color-info-bg); color: var(--color-info-text);
+      border-radius: var(--radius-md); padding: 10px 14px;
+      font-size: 13px; margin: 8px 0 14px 0;
       border-left: 4px solid var(--color-info-border);
       line-height: 1.5;
     }
     .help-callout strong { color: #0C447C; }
-
     .snapshot {
       border-left: 4px solid var(--color-accent);
       padding: 12px 16px;
@@ -317,25 +264,20 @@
       margin: 10px 0;
     }
     .tag-small {
-      display: inline-block;
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 999px;
+      display: inline-block; font-size: 11px;
+      padding: 3px 10px; border-radius: 999px;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
-      margin: 2px 4px 2px 0;
-      font-weight: 600;
+      margin: 2px 4px 2px 0; font-weight: 600;
     }
     .tag-small.pos { background: var(--color-success-bg); color: var(--color-success-text); }
     .tag-small.neg { background: var(--color-danger-bg); color: var(--color-danger-text); }
     .tag-small.neu { background: var(--color-warning-bg); color: var(--color-warning-text); }
     .tag-small.dim { font-family: monospace; }
-
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      margin: 14px 0;
+      gap: 12px; margin: 14px 0;
     }
     .stat-card { padding: 14px 16px; border-radius: var(--radius-md); color: white; }
     .stat-card.teal { background: #0F6E56; }
@@ -344,30 +286,23 @@
     .stat-card.purple { background: #534AB7; }
     .stat-num { font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
     .stat-lbl { font-size: 12px; opacity: 0.9; }
-
     .student-row {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
-      padding: 12px 16px;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 12px 16px; margin-bottom: 8px;
+      display: flex; justify-content: space-between; align-items: center;
       transition: all 0.12s;
     }
     .student-row:hover { border-color: var(--color-border-strong); }
     .student-row.clickable { cursor: pointer; }
     .student-row.clickable:hover { background: var(--color-surface-alt); }
     .avatar {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      background: var(--color-accent);
-      color: white;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--color-accent); color: white;
       display: inline-flex; align-items: center; justify-content: center;
       font-size: 13px; font-weight: 700;
-      margin-right: 10px;
-      flex-shrink: 0;
+      margin-right: 10px; flex-shrink: 0;
     }
     .avatar.c1 { background: #0F6E56; }
     .avatar.c2 { background: #185FA5; }
@@ -375,201 +310,328 @@
     .avatar.c4 { background: #BA7517; }
     .avatar.c5 { background: #D4537E; }
     .avatar.c6 { background: #5F5E5A; }
-
     .muted { color: var(--color-text-secondary); font-size: 13px; }
     .tiny { font-size: 12px; color: var(--color-text-tertiary); }
     h3 { margin: 0 0 12px 0; font-size: 17px; }
-
     .toggle-row {
       display: flex; align-items: center; gap: 10px;
-      font-size: 14px;
-      margin: 8px 0;
-      cursor: pointer;
-      padding: 6px 0;
+      font-size: 14px; margin: 8px 0;
+      cursor: pointer; padding: 6px 0;
     }
     .toggle-row input { width: 20px; height: 20px; margin: 0; cursor: pointer; }
-
     .stepper {
       display: inline-flex; align-items: center; gap: 0;
       border: 1px solid var(--color-border-strong);
-      border-radius: var(--radius-md);
-      overflow: hidden;
+      border-radius: var(--radius-md); overflow: hidden;
     }
     .stepper button {
-      background: var(--color-surface);
-      border: none;
-      width: 40px; height: 40px;
-      cursor: pointer;
-      font-size: 20px;
-      color: var(--color-text);
+      background: var(--color-surface); border: none;
+      width: 40px; height: 40px; cursor: pointer;
+      font-size: 20px; color: var(--color-text);
       font-family: inherit;
     }
     .stepper button:hover { background: var(--color-surface-alt); }
     .stepper button:disabled { color: var(--color-text-tertiary); cursor: not-allowed; }
     .stepper .stepper-val {
-      min-width: 44px;
-      text-align: center;
+      min-width: 44px; text-align: center;
       font-size: 16px; font-weight: 700;
       padding: 0 6px;
       border-left: 1px solid var(--color-border);
       border-right: 1px solid var(--color-border);
       line-height: 40px;
     }
-
     select {
-      padding: 10px 12px;
-      border-radius: var(--radius-md);
+      padding: 10px 12px; border-radius: var(--radius-md);
       border: 1px solid var(--color-border-strong);
-      background: var(--color-surface);
-      color: var(--color-text);
-      font-size: 14px;
-      font-family: inherit;
-      min-height: 44px;
-      cursor: pointer;
+      background: var(--color-surface); color: var(--color-text);
+      font-size: 14px; font-family: inherit;
+      min-height: 44px; cursor: pointer;
     }
-
     .pick-cta {
       background: linear-gradient(135deg, #EAF3DE 0%, #E1F5EE 100%);
       border-radius: var(--radius-lg);
-      padding: 32px 24px;
-      text-align: center;
+      padding: 32px 24px; text-align: center;
       margin: 10px 0;
     }
     .pick-cta h2 {
-      margin: 0 0 6px 0;
-      font-size: 22px;
-      color: #173404;
-      font-weight: 700;
+      margin: 0 0 6px 0; font-size: 22px;
+      color: #173404; font-weight: 700;
     }
     .pick-cta p { margin: 0 0 18px 0; color: #27500A; font-size: 14px; }
-
+    .pick-cta .ctx { font-size: 12px; color: #5F5E5A; margin-bottom: 12px; }
     .coverage-readout {
       background: var(--color-surface-alt);
       border-radius: var(--radius-md);
-      padding: 12px 14px;
-      margin: 10px 0;
-      font-size: 13px;
-      color: var(--color-text-secondary);
+      padding: 12px 14px; margin: 10px 0;
+      font-size: 13px; color: var(--color-text-secondary);
       line-height: 1.7;
     }
     .coverage-readout strong { color: var(--color-text); font-weight: 600; }
     .coverage-good { color: #27500A; font-weight: 700; }
     .coverage-low { color: #BA7517; font-weight: 700; }
     .coverage-high { color: #185FA5; font-weight: 700; }
-
     ul.tip-list { margin: 8px 0 0 0; padding-left: 20px; }
     ul.tip-list li { margin: 4px 0; font-size: 13px; color: var(--color-text-secondary); }
-
     details summary { outline: none; cursor: pointer; }
     .input-text {
-      padding: 10px 12px;
-      border-radius: var(--radius-md);
+      padding: 10px 12px; border-radius: var(--radius-md);
       border: 1px solid var(--color-border-strong);
-      background: var(--color-surface);
-      color: var(--color-text);
-      font-size: 16px;
-      font-family: inherit;
-      width: 100%;
-      min-height: 44px;
+      background: var(--color-surface); color: var(--color-text);
+      font-size: 16px; font-family: inherit;
+      width: 100%; min-height: 44px;
     }
-
-    /* Modal */
+    .form-row { margin: 12px 0; }
+    .form-row label { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-tertiary); margin-bottom: 6px; font-weight: 600; }
     .modal-overlay {
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background: rgba(0,0,0,0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 20px;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; padding: 20px;
     }
     .modal {
       background: var(--color-surface);
       border-radius: var(--radius-lg);
-      padding: 20px;
-      max-width: 500px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
+      padding: 20px; max-width: 500px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
       box-shadow: 0 10px 40px rgba(0,0,0,0.2);
     }
     .modal h3 { margin-top: 0; }
     .modal-actions {
-      display: flex;
-      gap: 8px;
+      display: flex; gap: 8px;
       justify-content: flex-end;
-      margin-top: 16px;
-      flex-wrap: wrap;
+      margin-top: 16px; flex-wrap: wrap;
     }
-    .install-hint {
-      background: var(--color-info-bg);
-      color: var(--color-info-text);
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
-      font-size: 13px;
-      margin-bottom: 12px;
-      line-height: 1.5;
-      border-left: 4px solid var(--color-info-border);
-    }
-
     @supports (-webkit-touch-callout: none) {
-      /* iOS-specific tweaks */
-      input, textarea, select { font-size: 16px; } /* prevents zoom on focus */
+      input, textarea, select { font-size: 16px; }
     }
   </style>
 </head>
 <body>
-  <div id="app">
-    <div id="view-root"></div>
-  </div>
+  <div id="app"><div id="view-root"></div></div>
   <div id="modal-root"></div>
-
   <script>
   (function(){
-    const RATINGS = [
-      {key:'behavioral', label:'Behavioral', icon:'\u26A1', help:'On-task actions, participation', opts:['off-task','low','moderate','active','very active']},
-      {key:'cognitive', label:'Cognitive', icon:'\u{1F9E0}', help:'Thinking deeply, asking questions', opts:['surface','developing','solid','strong','high-level']},
-      {key:'emotional', label:'Emotional', icon:'\u{1F642}', help:'Affect & interest', opts:['withdrawn','flat','positive','engaged','enthusiastic']},
-      {key:'social', label:'Social', icon:'\u{1F465}', help:'Interaction with peers', opts:['isolated','minimal','cooperative','collaborative','leading']}
+    const GRADE_BANDS = [
+      {key:'k2',  label:'K\u20132 (Primary)',       hint:'Concrete, observable, play-based'},
+      {key:'35',  label:'3\u20135 (Intermediate)',  hint:'Watch for early disengagement signals'},
+      {key:'68',  label:'6\u20138 (Middle)',        hint:'Peer dynamics & emotional safety matter most'},
+      {key:'912', label:'9\u201312 (Upper/High)',   hint:'Notice agency, ownership, real engagement vs. compliance'}
+    ];
+    const SUBJECTS = [
+      {key:'elem',  label:'Elementary General'},
+      {key:'arts',  label:'Arts (Visual & Performing)'},
+      {key:'human', label:'Humanities (LA, Lit, History)'},
+      {key:'stem',  label:'STEM (Science/Math)'},
+      {key:'lang',  label:'Languages'},
+      {key:'pe',    label:'Physical Education'}
     ];
 
-    const POS_TAGS = ['asked a question','contributed in discussion','helped a peer','connected to prior learning','showed persistence','tried a new strategy','led group work','visible growth'];
-    const NEU_TAGS = ['quiet today','first time speaking','returned after absence','seemed tired','asked for help'];
-    const NEG_TAGS = ['looked away during instruction','side conversation','work not started','put head down','left seat repeatedly'];
+    function getRatings(band){
+      const wordings = {
+        k2: {
+          behavioral: ['wandering','starting','joining in','focused','very focused'],
+          cognitive:  ['just watching','tries simple ideas','tries on their own','makes connections','asks deep "why"s'],
+          emotional:  ['upset/withdrawn','quiet','interested','happy & curious','excited'],
+          social:     ['plays alone','plays near peers','plays with peers','shares & takes turns','leads/helps peers'],
+          agentic:    ['no initiative','asks for help','makes a choice','suggests an idea','directs their activity']
+        },
+        '35': {
+          behavioral: ['off-task','distracted','on-task','active','very active'],
+          cognitive:  ['surface','developing','solid','strong','high-level'],
+          emotional:  ['withdrawn','flat','positive','engaged','enthusiastic'],
+          social:     ['isolated','minimal','cooperative','collaborative','leading'],
+          agentic:    ['compliant only','asks questions','makes choices','offers ideas','drives their learning']
+        },
+        '68': {
+          behavioral: ['checked out','low effort','present','engaged','fully invested'],
+          cognitive:  ['surface','developing','solid','strong','sophisticated'],
+          emotional:  ['shut down','flat','steady','interested','enthusiastic'],
+          social:     ['isolated','minimal','cooperative','collaborative','leading'],
+          agentic:    ['waits for direction','responds when asked','contributes ideas','reshapes the task','drives discussion']
+        },
+        '912': {
+          behavioral: ['checked out','compliant only','present','engaged','fully invested'],
+          cognitive:  ['surface','developing','sound','strong','sophisticated'],
+          emotional:  ['shut down','flat','steady','interested','enthusiastic'],
+          social:     ['isolated','minimal','cooperative','collaborative','leading'],
+          agentic:    ['passive','responsive','proactive','reshaping','driving discourse']
+        }
+      };
+      const w = wordings[band] || wordings['35'];
+      return [
+        {key:'behavioral', label:'Behavioral', icon:'\u26A1',   help:'On-task actions, participation', opts: w.behavioral},
+        {key:'cognitive',  label:'Cognitive',  icon:'\u{1F9E0}', help:'Thinking, questioning, connecting', opts: w.cognitive},
+        {key:'emotional',  label:'Emotional',  icon:'\u{1F642}', help:'Affect & interest \u2014 describe, don\'t assume', opts: w.emotional},
+        {key:'social',     label:'Social',     icon:'\u{1F465}', help:'Interaction with peers', opts: w.social},
+        {key:'agentic',    label:'Agentic',    icon:'\u{1F9ED}', help:'Student-initiated direction & choice', opts: w.agentic}
+      ];
+    }
 
-    const PROMPT_GROUPS = [
+    function defaultDimensionsForClass(band, subject){
+      const out = { showSocial: false, showAgentic: false };
+      if (band === 'k2' || subject === 'arts' || subject === 'pe') out.showSocial = true;
+      if (band === '68' || band === '912' || subject === 'arts') out.showAgentic = true;
+      return out;
+    }
+
+    const BASE_TAGS = {
+      pos: ['asked a question','contributed in discussion','helped a peer','showed persistence','tried a new strategy','visible growth'],
+      neu: ['quiet today','first time speaking','returned after absence','seemed tired','asked for help'],
+      neg: ['looked away during instruction','side conversation','work not started','put head down','left seat repeatedly']
+    };
+    const BAND_TAGS = {
+      k2: {
+        pos: ['exploring materials','used new vocabulary','followed multi-step direction','took turns','self-regulated'],
+        neu: ['needed reminder','transition was rough','tried but tired'],
+        neg: ['blurted out','grabbed materials','left activity early']
+      },
+      '35': {
+        pos: ['took initiative','made a connection','self-corrected'],
+        neu: ['needed redirection','followed but quiet'],
+        neg: ['rushed through work','didn\'t check work']
+      },
+      '68': {
+        pos: ['self-advocated','navigated peer conflict well','took risk in answer'],
+        neu: ['observing peers','responded to redirection'],
+        neg: ['phone out / off-device task','peer-influenced disengagement','shut down when challenged']
+      },
+      '912': {
+        pos: ['challenged an idea respectfully','synthesized peer ideas','took ownership of learning','sought out feedback'],
+        neu: ['present but minimal','engaged only with peers'],
+        neg: ['compliance without engagement','phone-distracted','left class early']
+      }
+    };
+    const SUBJECT_TAGS = {
+      elem:  { pos: ['shared during circle','followed center routine'], neu: ['needed help with materials'], neg: [] },
+      arts:  {
+        pos: ['took creative risk','iterated on work','gave thoughtful peer feedback','tried a new technique','strong artistic choice'],
+        neu: ['observing peers\' work','warming up slowly'],
+        neg: ['rushed the work','copied without trying','wouldn\'t share work']
+      },
+      human: {
+        pos: ['cited textual evidence','built on a peer\'s idea','asked an analytical question','took a position with reasons'],
+        neu: ['listening but not contributing','reading along quietly'],
+        neg: ['didn\'t do the reading','surface-level response only']
+      },
+      stem:  {
+        pos: ['made a prediction','productive struggle','justified reasoning','tested a hypothesis','noticed a pattern'],
+        neu: ['working through confusion','quiet but working'],
+        neg: ['guessed without reasoning','gave up at first obstacle','copied an answer']
+      },
+      lang:  {
+        pos: ['attempted target language','self-corrected pronunciation','used new vocabulary','code-switched purposefully','willing to make mistakes'],
+        neu: ['quiet practice','listening for input'],
+        neg: ['English-only when target was expected','reluctant to speak aloud']
+      },
+      pe:    {
+        pos: ['encouraged a teammate','tried new movement','modified activity well','strong sportsmanship','pushed personal effort'],
+        neu: ['sitting out (legit reason)','warming up slowly'],
+        neg: ['unsafe behavior','poor sportsmanship','refused to participate']
+      }
+    };
+
+    function dedupe(arr){ return Array.from(new Set(arr)); }
+    function getTagsForClass(c){
+      const bt = BAND_TAGS[c.gradeBand] || {pos:[],neu:[],neg:[]};
+      const st = SUBJECT_TAGS[c.subject] || {pos:[],neu:[],neg:[]};
+      return {
+        pos: dedupe([...BASE_TAGS.pos, ...bt.pos, ...st.pos]),
+        neu: dedupe([...BASE_TAGS.neu, ...bt.neu, ...st.neu]),
+        neg: dedupe([...BASE_TAGS.neg, ...bt.neg, ...st.neg])
+      };
+    }
+
+    const BASE_PROMPTS = [
       { group: 'Describe what you saw', icon: '\u{1F441}', prompts: [
         "What did this student say or do specifically? Quote them if possible.",
-        "What did their body language or actions show during the lesson?",
-        "What did their work today look like \u2014 what did they produce or attempt?"
+        "What did their body language or actions show during the lesson?"
       ]},
-      { group: 'ABC framework', icon: '\u21C4', prompts: [
-        "Antecedent \u2192 Behavior \u2192 Consequence: What came before, what did the student do, what happened after?",
-        "Was there a specific trigger or moment that changed how they engaged today?"
-      ]},
-      { group: 'Strengths-first lens', icon: '\u2728', prompts: [
+      { group: 'Strengths-first', icon: '\u2728', prompts: [
         "What is one thing this student is doing well right now?",
-        "What did they try today, even if it didn't fully land?",
-        "What growth have you noticed in this student over the past few weeks?"
+        "What growth have you noticed over the past few weeks?"
       ]},
       { group: 'Report-card evidence', icon: '\u{1F4CB}', prompts: [
         "What's one specific moment from today you'd cite at conferences?",
-        "What feedback would help this student grow next class?",
         "What would you want a parent to know about today?"
       ]}
     ];
-    const ALL_PROMPTS = PROMPT_GROUPS.flatMap(g => g.prompts.map(p => ({group: g.group, icon: g.icon, text: p})));
+    const BAND_PROMPTS = {
+      k2: [{ group: 'For young learners', icon: '\u{1F33F}', prompts: [
+        "What play or exploration did you see?",
+        "How did this child interact with materials or peers today?",
+        "What new word, idea, or skill is emerging?",
+        "What did they do independently that they couldn\'t do last month?"
+      ]}],
+      '35': [{ group: 'Intermediate watchpoints', icon: '\u{1F50D}', prompts: [
+        "Are you seeing any early signs of disengagement to note?",
+        "How is this student handling independent vs. group work?",
+        "What\'s their relationship with productive struggle today?"
+      ]}],
+      '68': [{ group: 'Middle school dynamics', icon: '\u{1F91D}', prompts: [
+        "How did peer dynamics shape this student\'s engagement today?",
+        "Did you see any moments of vulnerability or risk-taking?",
+        "Was this real engagement or compliance? What signaled which?",
+        "What did this student\'s sense of belonging look like today?"
+      ]}],
+      '912': [{ group: 'High school engagement', icon: '\u{1F393}', prompts: [
+        "Was this real engagement, or just compliance? What\'s the evidence?",
+        "Where did you see agency \u2014 student-initiated thinking or action?",
+        "What did they do that they own, vs. what they did because asked?",
+        "What would you want them to know about how they showed up?"
+      ]}]
+    };
+    const SUBJECT_PROMPTS = {
+      elem: [],
+      arts: [{ group: 'Arts lens', icon: '\u{1F3A8}', prompts: [
+        "What creative choice did this student make today?",
+        "Did they take an artistic risk? What did it look like?",
+        "How did they respond to peer or teacher feedback?",
+        "What did their process \u2014 not just product \u2014 show today?"
+      ]}],
+      human: [{ group: 'Humanities lens', icon: '\u{1F4DA}', prompts: [
+        "What evidence-based thinking did you observe?",
+        "How did they engage with the text/source today?",
+        "Did they build on, challenge, or extend another\'s idea?",
+        "What was the quality of their reasoning?"
+      ]}],
+      stem: [{ group: 'STEM lens', icon: '\u{1F9EA}', prompts: [
+        "What problem-solving move did you notice?",
+        "How did they handle being stuck or wrong?",
+        "Did they reason out their answer or guess?",
+        "What was their relationship with productive struggle?"
+      ]}],
+      lang: [{ group: 'Languages lens', icon: '\u{1F30D}', prompts: [
+        "How willing were they to use the target language?",
+        "What linguistic risks did they take?",
+        "How did they handle communication breakdowns?",
+        "What did their listening tell you?"
+      ]}],
+      pe: [{ group: 'PE lens', icon: '\u26BD', prompts: [
+        "What was their physical engagement and effort?",
+        "How did they interact with teammates today?",
+        "Did they modify or adapt skillfully?",
+        "What did their sportsmanship look like?"
+      ]}]
+    };
+    function getPromptsForClass(c){
+      const groups = [
+        ...BASE_PROMPTS,
+        ...(BAND_PROMPTS[c.gradeBand] || []),
+        ...(SUBJECT_PROMPTS[c.subject] || [])
+      ];
+      return groups.flatMap(g => g.prompts.map(p => ({group: g.group, icon: g.icon, text: p})));
+    }
 
     const SCHEDULE_OPTIONS = [
-      {key:'daily-5', label:'Daily (5\u00D7/week)', meetings: 5},
-      {key:'block-3', label:'Block A/B (3\u00D7/week)', meetings: 3},
-      {key:'block-25', label:'Block A/B (avg 2.5\u00D7/week)', meetings: 2.5},
-      {key:'block-2', label:'Block A/B (2\u00D7/week)', meetings: 2},
-      {key:'weekly', label:'Weekly (1\u00D7/week)', meetings: 1}
+      {key:'daily-5',  label:'Daily (5\u00D7/week)',         meetings: 5},
+      {key:'block-3',  label:'Block A/B (3\u00D7/week)',     meetings: 3},
+      {key:'block-25', label:'Block A/B (avg 2.5\u00D7/wk)', meetings: 2.5},
+      {key:'block-2',  label:'Block A/B (2\u00D7/week)',     meetings: 2},
+      {key:'weekly',   label:'Weekly (1\u00D7/week)',         meetings: 1}
     ];
 
-    const STORAGE_KEY = 'classroom-snapshots-v1';
+    const STORAGE_KEY = 'classroom-snapshots-v2';
+    const OLD_STORAGE_KEY = 'classroom-snapshots-v1';
 
     const state = {
       classes: [],
@@ -579,7 +641,6 @@
       selectedStudentDetail: null,
       toast: null,
       promptIndex: 0,
-      showSocial: false,
       modal: null
     };
 
@@ -588,7 +649,6 @@
       if (!meetingsPerWeek || meetingsPerWeek <= 0) meetingsPerWeek = 2.5;
       return Math.max(1, Math.min(numStudents, Math.ceil(numStudents / meetingsPerWeek)));
     }
-
     function studentFrequency(numStudents, pickCount, meetingsPerWeek){
       if (numStudents <= 0 || pickCount <= 0) return null;
       const snapshotsPerWeek = pickCount * meetingsPerWeek;
@@ -604,25 +664,42 @@
           const parsed = JSON.parse(raw);
           state.classes = parsed.classes || [];
           state.activeClassId = parsed.activeClassId || (state.classes[0] && state.classes[0].id) || null;
-          state.showSocial = !!parsed.showSocial;
+        } else {
+          migrateFromV1();
         }
-      } catch(e){ console.error('Load failed', e); }
+      } catch(e){ console.error('Load failed', e); migrateFromV1(); }
       state.classes.forEach(c => {
         if (!c.scheduleKey) c.scheduleKey = 'block-25';
+        if (!c.gradeBand) c.gradeBand = '35';
+        if (!c.subject) c.subject = 'elem';
+        const defs = defaultDimensionsForClass(c.gradeBand, c.subject);
+        if (typeof c.showSocial !== 'boolean') c.showSocial = defs.showSocial;
+        if (typeof c.showAgentic !== 'boolean') c.showAgentic = defs.showAgentic;
         const sched = SCHEDULE_OPTIONS.find(s => s.key === c.scheduleKey) || SCHEDULE_OPTIONS[2];
         if (typeof c.pickCount !== 'number') c.pickCount = recommendedPickCount(c.students.length, sched.meetings);
       });
+      saveState();
       render();
     }
-
+    function migrateFromV1(){
+      try {
+        const raw = localStorage.getItem(OLD_STORAGE_KEY);
+        if (raw){
+          const parsed = JSON.parse(raw);
+          state.classes = parsed.classes || [];
+          state.activeClassId = parsed.activeClassId || null;
+          if (parsed.showSocial){ state.classes.forEach(c => { c.showSocial = true; }); }
+          showToast('Loaded existing data.');
+        }
+      } catch(e){}
+    }
     function saveState(){
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify({
           classes: state.classes,
-          activeClassId: state.activeClassId,
-          showSocial: state.showSocial
+          activeClassId: state.activeClassId
         }));
-      } catch(e){ console.error('Save failed', e); showToast('Save failed \u2014 check device storage.'); }
+      } catch(e){ console.error('Save failed', e); showToast('Save failed.'); }
     }
 
     function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
@@ -631,8 +708,14 @@
     function shuffle(arr){ const a = arr.slice(); for (let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
     function avatarColor(name){ const colors=['c1','c2','c3','c4','c5','c6']; let h=0; for(let i=0;i<name.length;i++) h=(h+name.charCodeAt(i))%colors.length; return colors[h]; }
     function initials(name){ return name.trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase() || '?'; }
-    function tagClass(tag){ if (POS_TAGS.includes(tag)) return 'pos'; if (NEG_TAGS.includes(tag)) return 'neg'; return 'neu'; }
     function classMeetings(c){ const s = SCHEDULE_OPTIONS.find(s => s.key === c.scheduleKey); return s ? s.meetings : 2.5; }
+    function gradeBandLabel(key){ const g = GRADE_BANDS.find(g => g.key === key); return g ? g.label.split(' ')[0] : ''; }
+    function subjectLabel(key){ const s = SUBJECTS.find(s => s.key === key); return s ? s.label : ''; }
+    function tagPolarity(tag, tags){
+      if (tags.pos.includes(tag)) return 'pos';
+      if (tags.neg.includes(tag)) return 'neg';
+      return 'neu';
+    }
 
     function rollStudents(n){
       const c = activeClass(); if (!c) return [];
@@ -640,17 +723,16 @@
       n = Math.min(n, c.students.length);
       return shuffle(c.students).slice(0, n).map(s => s.id);
     }
-
     function startCapture(){
       const c = activeClass(); if (!c) return;
       if (c.students.length === 0){ showToast('Add students first.'); return; }
       const n = Math.min(c.pickCount || recommendedPickCount(c.students.length, classMeetings(c)), c.students.length);
       state.captureDraft = { selectedStudentIds: rollStudents(n), perStudent: {} };
       state.captureDraft.selectedStudentIds.forEach(sid => { state.captureDraft.perStudent[sid] = { ratings:{}, tags:[], note:'' }; });
-      state.promptIndex = Math.floor(Math.random()*ALL_PROMPTS.length);
+      const prompts = getPromptsForClass(c);
+      state.promptIndex = Math.floor(Math.random()*prompts.length);
       render();
     }
-
     function rerollOne(sid){
       const c = activeClass(); if (!c) return;
       const cd = state.captureDraft;
@@ -686,14 +768,20 @@
     }
     function setRating(sid, key, val){ const e = state.captureDraft.perStudent[sid]; if (!e) return; e.ratings[key] = e.ratings[key] === val ? '' : val; render(); }
     function toggleTag(sid, tag){ const e = state.captureDraft.perStudent[sid]; if (!e) return; const i = e.tags.indexOf(tag); if (i >= 0) e.tags.splice(i,1); else e.tags.push(tag); render(); }
-    function nextPrompt(){ state.promptIndex = (state.promptIndex + 1) % ALL_PROMPTS.length; syncDraftNotes(); render(); }
-
+    function nextPrompt(){
+      const c = activeClass(); if (!c) return;
+      const prompts = getPromptsForClass(c);
+      state.promptIndex = (state.promptIndex + 1) % prompts.length;
+      syncDraftNotes();
+      render();
+    }
     function saveSnapshots(){
       const c = activeClass(); if (!c) return;
       const cd = state.captureDraft;
       if (!cd || cd.selectedStudentIds.length === 0){ showToast('No students selected.'); return; }
       syncDraftNotes();
       const now = new Date().toISOString();
+      const prompts = getPromptsForClass(c);
       let saved = 0;
       cd.selectedStudentIds.forEach(sid => {
         const e = cd.perStudent[sid];
@@ -703,7 +791,8 @@
           id: uid(), studentId: sid, date: now,
           ratings: { ...e.ratings }, tags: [...e.tags],
           note: (e.note || '').trim(),
-          promptUsed: ALL_PROMPTS[state.promptIndex].text
+          promptUsed: prompts[state.promptIndex] ? prompts[state.promptIndex].text : '',
+          gradeBand: c.gradeBand, subject: c.subject
         });
         saved++;
       });
@@ -713,17 +802,11 @@
       showToast('Saved ' + saved + ' snapshot' + (saved===1?'':'s') + '.');
     }
 
-    // ----- Modal helpers -----
     function openModal(content){ state.modal = content; render(); }
     function closeModal(){ state.modal = null; render(); }
-
     function openAddClassModal(){
-      openModal({
-        type: 'addClass',
-        title: 'Add a class',
-        nameValue: '',
-        scheduleKey: 'block-25'
-      });
+      openModal({ type: 'addClass', title: 'Add a class', nameValue: '',
+        scheduleKey: 'block-25', gradeBand: '35', subject: 'elem' });
     }
     function openRenameClassModal(){
       const c = activeClass(); if (!c) return;
@@ -738,11 +821,18 @@
     function openConfirmModal(message, onConfirm){
       openModal({ type: 'confirm', title: 'Are you sure?', message, onConfirm });
     }
-
     function submitAddClass(){
       const name = state.modal.nameValue.trim();
       if (!name) return;
-      const c = { id: uid(), name, students: [], snapshots: [], pickCount: 1, scheduleKey: state.modal.scheduleKey || 'block-25' };
+      const gradeBand = state.modal.gradeBand;
+      const subject = state.modal.subject;
+      const defs = defaultDimensionsForClass(gradeBand, subject);
+      const c = {
+        id: uid(), name, students: [], snapshots: [],
+        pickCount: 1, scheduleKey: state.modal.scheduleKey || 'block-25',
+        gradeBand, subject,
+        showSocial: defs.showSocial, showAgentic: defs.showAgentic
+      };
       state.classes.push(c);
       state.activeClassId = c.id;
       state.captureDraft = null;
@@ -802,7 +892,6 @@
         render();
       });
     }
-
     function adjustPickCount(delta){
       const c = activeClass(); if (!c) return;
       c.pickCount = Math.max(1, Math.min(c.students.length || 1, (c.pickCount || 1) + delta));
@@ -813,20 +902,50 @@
       c.scheduleKey = key;
       saveState(); render();
     }
+    function changeGradeBand(key){
+      const c = activeClass(); if (!c) return;
+      c.gradeBand = key;
+      const defs = defaultDimensionsForClass(c.gradeBand, c.subject);
+      if (defs.showSocial) c.showSocial = true;
+      if (defs.showAgentic) c.showAgentic = true;
+      saveState(); render();
+    }
+    function changeSubject(key){
+      const c = activeClass(); if (!c) return;
+      c.subject = key;
+      const defs = defaultDimensionsForClass(c.gradeBand, c.subject);
+      if (defs.showSocial) c.showSocial = true;
+      if (defs.showAgentic) c.showAgentic = true;
+      saveState(); render();
+    }
     function applyRecommendation(){
       const c = activeClass(); if (!c) return;
       c.pickCount = recommendedPickCount(c.students.length, classMeetings(c));
       saveState(); render();
     }
+    function toggleDimension(key){
+      const c = activeClass(); if (!c) return;
+      if (key === 'social') c.showSocial = !c.showSocial;
+      if (key === 'agentic') c.showAgentic = !c.showAgentic;
+      saveState(); render();
+    }
 
     function csvEscape(s){ if (s === null || s === undefined) return ''; const str = String(s); if (str.includes('"') || str.includes(',') || str.includes('\n')) return '"'+str.replace(/"/g,'""')+'"'; return str; }
     function exportCSV(scope){
-      const rows = [['date','class','student','behavioral','cognitive','emotional','social','tags','note','prompt_used']];
+      const rows = [['date','class','grade_band','subject','student','behavioral','cognitive','emotional','social','agentic','tags','note','prompt_used']];
       const classes = scope === 'all' ? state.classes : [activeClass()].filter(Boolean);
       classes.forEach(c => {
         c.snapshots.forEach(sn => {
           const name = (c.students.find(s=>s.id===sn.studentId)||{}).name || '(removed)';
-          rows.push([sn.date, c.name, name, sn.ratings.behavioral||'', sn.ratings.cognitive||'', sn.ratings.emotional||'', sn.ratings.social||'', sn.tags.join('; '), sn.note, sn.promptUsed||'']);
+          rows.push([
+            sn.date, c.name,
+            gradeBandLabel(sn.gradeBand || c.gradeBand),
+            subjectLabel(sn.subject || c.subject),
+            name,
+            sn.ratings.behavioral||'', sn.ratings.cognitive||'',
+            sn.ratings.emotional||'', sn.ratings.social||'', sn.ratings.agentic||'',
+            sn.tags.join('; '), sn.note, sn.promptUsed||''
+          ]);
         });
       });
       if (rows.length === 1){ showToast('No snapshots to export yet.'); return; }
@@ -839,9 +958,8 @@
       URL.revokeObjectURL(url);
       showToast('Exported ' + (rows.length-1) + ' snapshot' + (rows.length-1===1?'':'s') + '.');
     }
-
     function exportBackup(){
-      const data = { exportedAt: new Date().toISOString(), version: 'v1', classes: state.classes, showSocial: state.showSocial };
+      const data = { exportedAt: new Date().toISOString(), version: 'v2', classes: state.classes };
       const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -850,7 +968,6 @@
       URL.revokeObjectURL(url);
       showToast('Backup file downloaded.');
     }
-
     function importBackup(file){
       const reader = new FileReader();
       reader.onload = e => {
@@ -859,22 +976,19 @@
           if (!data.classes) throw new Error('Invalid backup file');
           openConfirmModal('Replace all current data with the backup? This cannot be undone.', () => {
             state.classes = data.classes;
-            state.showSocial = !!data.showSocial;
             state.activeClassId = state.classes[0] && state.classes[0].id || null;
             closeModal();
             saveState();
             showToast('Backup restored.');
-            render();
+            loadState();
           });
         } catch(err){ showToast('Could not read backup file.'); }
       };
       reader.readAsText(file);
     }
 
-    // ----- Render -----
     function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
     function escapeAttr(s){ return escapeHtml(s); }
-
     function syncDraftNotes(){
       if (!state.captureDraft) return;
       state.captureDraft.selectedStudentIds.forEach(sid => {
@@ -887,30 +1001,22 @@
       const root = document.getElementById('view-root');
       const c = activeClass();
       let html = '';
-
-      html += '<div class="hero">';
-      html += '<div class="hero-icon">\u{1F4DA}</div>';
-      html += '<div><h1>Classroom snapshots</h1><p>Capture quick post-class observations \u2014 feed them into term-end comments</p></div>';
-      html += '</div>';
-
+      html += '<div class="hero"><div class="hero-icon">\u{1F4DA}</div>';
+      html += '<div><h1>Classroom snapshots</h1><p>Capture quick post-class observations \u2014 feed them into term-end comments</p></div></div>';
       html += '<div class="class-bar">';
       if (state.classes.length === 0){
         html += '<span class="muted" style="padding: 0 6px;">No classes yet \u2014</span>';
       } else {
         state.classes.forEach(cl => {
           const active = cl.id === state.activeClassId ? 'active' : '';
-          html += '<div class="class-tab '+active+'" data-class="'+cl.id+'">'+escapeHtml(cl.name)+'</div>';
+          const gb = gradeBandLabel(cl.gradeBand);
+          html += '<div class="class-tab '+active+'" data-class="'+cl.id+'">'+escapeHtml(cl.name);
+          if (gb) html += ' <span class="badge">'+escapeHtml(gb)+'</span>';
+          html += '</div>';
         });
       }
-      html += '<button class="btn small" id="add-class">+ Add class</button>';
-      if (c){
-        html += '<button class="btn small" id="rename-class">Rename</button>';
-        html += '<button class="btn small danger" id="delete-class">Delete</button>';
-      }
-      html += '</div>';
-
+      html += '<button class="btn small" id="add-class">+ Add class</button></div>';
       if (state.toast) html += '<div class="toast">\u2713 '+escapeHtml(state.toast)+'</div>';
-
       if (!c){
         html += '<div class="empty-state"><div class="big-icon">\u{1F3EB}</div><p style="font-size:15px; margin: 0 0 14px 0;">Add your first class to get started.</p><button class="btn primary" id="add-class-empty">+ Create a class</button></div>';
         root.innerHTML = html;
@@ -918,7 +1024,6 @@
         wire();
         return;
       }
-
       html += '<div class="view-tabs">';
       html += '<div class="view-tab '+(state.view==='capture'?'active':'')+'" data-view="capture">\u{1F4F8} Capture</div>';
       html += '<div class="view-tab '+(state.view==='students'?'active':'')+'" data-view="students">\u{1F465} Students</div>';
@@ -926,13 +1031,11 @@
       html += '<div class="view-tab '+(state.view==='export'?'active':'')+'" data-view="export">\u{2B07} Export</div>';
       html += '<div class="view-tab '+(state.view==='settings'?'active':'')+'" data-view="settings">\u2699 Settings</div>';
       html += '</div>';
-
       if (state.view === 'capture') html += renderCapture(c);
       else if (state.view === 'students') html += renderStudents(c);
       else if (state.view === 'roster') html += renderRoster(c);
       else if (state.view === 'export') html += renderExport(c);
       else if (state.view === 'settings') html += renderSettings(c);
-
       root.innerHTML = html;
       renderModal();
       wire();
@@ -948,6 +1051,7 @@
         const rec = recommendedPickCount(c.students.length, classMeetings(c));
         html += '<div class="pick-cta">';
         html += '<h2>Ready to capture?</h2>';
+        html += '<div class="ctx">'+escapeHtml(gradeBandLabel(c.gradeBand))+' \u00B7 '+escapeHtml(subjectLabel(c.subject))+'</div>';
         html += '<p>Pick <strong>'+pc+'</strong> student'+(pc===1?'':'s')+' at random from <strong>'+escapeHtml(c.name)+'</strong> ('+c.students.length+' student'+(c.students.length===1?'':'s')+' total)</p>';
         html += '<button class="btn primary large" id="start-capture">\u{1F3B2} Pick '+pc+' student'+(pc===1?'':'s')+'</button>';
         if (pc !== rec){
@@ -956,23 +1060,24 @@
         html += '</div>';
         return html;
       }
-
+      const ratings = getRatings(c.gradeBand);
+      const tagSets = getTagsForClass(c);
+      const prompts = getPromptsForClass(c);
       html += '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">';
       html += '<h3 style="margin:0;">Today\'s snapshot \u00B7 '+state.captureDraft.selectedStudentIds.length+' selected</h3>';
       html += '<div style="display:flex; gap:6px;">';
       html += '<button class="btn small" id="add-override">+ Add student</button>';
       html += '<button class="btn small danger" id="cancel-capture">\u2716 Cancel</button>';
       html += '</div></div>';
-
-      const p = ALL_PROMPTS[state.promptIndex];
-      html += '<div class="prompt-box">';
-      html += '<div class="ptitle">'+p.icon+' '+escapeHtml(p.group)+'</div>';
-      html += '<div class="pbody">'+escapeHtml(p.text)+'</div>';
-      html += '<div class="pnext" id="next-prompt">\u21BB new prompt</div>';
-      html += '</div>';
-
-      html += '<div class="help-callout"><strong>Tip:</strong> Describe what you <em>saw or heard</em>, not what you assumed. "Looked away three times during instructions" works better than "wasn\'t paying attention."</div>';
-
+      const p = prompts[state.promptIndex] || prompts[0];
+      if (p){
+        html += '<div class="prompt-box">';
+        html += '<div class="ptitle">'+p.icon+' '+escapeHtml(p.group)+'</div>';
+        html += '<div class="pbody">'+escapeHtml(p.text)+'</div>';
+        html += '<div class="pnext" id="next-prompt">\u21BB new prompt</div>';
+        html += '</div>';
+      }
+      html += '<div class="help-callout"><strong>Tip:</strong> Describe what you <em>saw or heard</em>, not what you assumed.</div>';
       state.captureDraft.selectedStudentIds.forEach(sid => {
         const s = c.students.find(x => x.id === sid) || {name:'(removed)', id:sid};
         const e = state.captureDraft.perStudent[sid];
@@ -983,10 +1088,10 @@
         html += '<button class="btn small" data-reroll="'+sid+'">\u21BB Reroll</button>';
         html += '<button class="btn small danger" data-remove-from-draft="'+sid+'">\u2716</button>';
         html += '</div></div>';
-
         html += '<div class="section-header">Engagement</div>';
-        RATINGS.forEach(r => {
-          if (r.key === 'social' && !state.showSocial) return;
+        ratings.forEach(r => {
+          if (r.key === 'social' && !c.showSocial) return;
+          if (r.key === 'agentic' && !c.showAgentic) return;
           html += '<div class="rating-row">';
           html += '<div class="rating-label"><span class="dim-icon '+r.key+'">'+r.icon+'</span>'+escapeHtml(r.label)+'</div>';
           r.opts.forEach(opt => {
@@ -995,19 +1100,16 @@
           });
           html += '</div>';
         });
-
         html += '<div class="section-header">Observable tags</div>';
         html += '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">';
-        POS_TAGS.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill pos '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">+ '+escapeHtml(t)+'</span>'; });
-        NEU_TAGS.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill neu '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">~ '+escapeHtml(t)+'</span>'; });
-        NEG_TAGS.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill neg '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">! '+escapeHtml(t)+'</span>'; });
+        tagSets.pos.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill pos '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">+ '+escapeHtml(t)+'</span>'; });
+        tagSets.neu.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill neu '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">~ '+escapeHtml(t)+'</span>'; });
+        tagSets.neg.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill neg '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">! '+escapeHtml(t)+'</span>'; });
         html += '</div>';
-
         html += '<div class="section-header">Note</div>';
         html += '<textarea id="note-'+sid+'" placeholder="Describe what you observed (specific words, actions, work product)\u2026">'+escapeHtml(e.note||'')+'</textarea>';
         html += '</div>';
       });
-
       if (state.captureDraft.selectedStudentIds.length > 0){
         html += '<div style="display:flex; gap:8px; margin-top:14px;">';
         html += '<button class="btn primary large" id="save-snapshots" style="flex:1;">\u{1F4BE} Save snapshots</button>';
@@ -1022,6 +1124,7 @@
       if (state.selectedStudentDetail){
         const s = c.students.find(x => x.id === state.selectedStudentDetail) || {id:state.selectedStudentDetail, name:'(removed)'};
         const snaps = c.snapshots.filter(sn => sn.studentId === s.id).sort((a,b)=>b.date.localeCompare(a.date));
+        const tagSets = getTagsForClass(c);
         html += '<div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">';
         html += '<button class="btn small" id="back-to-students">\u2190 Back</button>';
         html += '<div class="avatar '+avatarColor(s.name)+'">'+escapeHtml(initials(s.name))+'</div>';
@@ -1044,7 +1147,7 @@
             }
             if (sn.tags.length){
               html += '<div style="margin-bottom:6px;">';
-              sn.tags.forEach(t => { html += '<span class="tag-small '+tagClass(t)+'">'+escapeHtml(t)+'</span>'; });
+              sn.tags.forEach(t => { html += '<span class="tag-small '+tagPolarity(t, tagSets)+'">'+escapeHtml(t)+'</span>'; });
               html += '</div>';
             }
             if (sn.note) html += '<div style="font-size:14px; margin-top:6px; line-height:1.5;">'+escapeHtml(sn.note)+'</div>';
@@ -1096,7 +1199,7 @@
       html += '</div>';
       html += '<div class="card" style="margin-top:14px;">';
       html += '<div class="section-header">Full backup (JSON)</div>';
-      html += '<p class="tiny" style="margin-top:0;">A backup of all your data, including roster, classes, settings, and notes. Use this to move data to another device or as a safety net.</p>';
+      html += '<p class="tiny" style="margin-top:0;">A full backup, including roster, classes, settings, and notes. Use for safety or to move between devices.</p>';
       html += '<div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">';
       html += '<button class="btn small" id="export-backup">\u2B07 Download backup</button>';
       html += '<label class="btn small" style="cursor:pointer;">\u2B06 Restore backup<input type="file" id="import-backup" accept=".json,application/json" style="display:none;"></label>';
@@ -1104,7 +1207,7 @@
       html += '</div>';
       html += '<div class="card" style="margin-top:14px;">';
       html += '<div class="section-header">CSV columns</div>';
-      html += '<p class="tiny">date \u00B7 class \u00B7 student \u00B7 behavioral \u00B7 cognitive \u00B7 emotional \u00B7 social \u00B7 tags \u00B7 note \u00B7 prompt_used</p>';
+      html += '<p class="tiny">date \u00B7 class \u00B7 grade_band \u00B7 subject \u00B7 student \u00B7 behavioral \u00B7 cognitive \u00B7 emotional \u00B7 social \u00B7 agentic \u00B7 tags \u00B7 note \u00B7 prompt_used</p>';
       html += '</div>';
       return html;
     }
@@ -1117,7 +1220,24 @@
         const freq = studentFrequency(c.students.length, c.pickCount || 1, meetings);
 
         html += '<div class="card">';
-        html += '<div class="section-header">Schedule for '+escapeHtml(c.name)+'</div>';
+        html += '<div class="section-header">Class profile: '+escapeHtml(c.name)+'</div>';
+        html += '<div class="form-row"><label>Grade band</label>';
+        html += '<select id="grade-select" style="width:100%; max-width:340px;">';
+        GRADE_BANDS.forEach(g => {
+          html += '<option value="'+g.key+'" '+(c.gradeBand===g.key?'selected':'')+'>'+escapeHtml(g.label)+'</option>';
+        });
+        html += '</select></div>';
+        html += '<div class="form-row"><label>Subject area</label>';
+        html += '<select id="subject-select" style="width:100%; max-width:340px;">';
+        SUBJECTS.forEach(s => {
+          html += '<option value="'+s.key+'" '+(c.subject===s.key?'selected':'')+'>'+escapeHtml(s.label)+'</option>';
+        });
+        html += '</select></div>';
+        html += '<p class="tiny" style="margin-top:8px;">Grade and subject customize the rating wording, tag library, and writing prompts. Existing snapshots are unaffected.</p>';
+        html += '</div>';
+
+        html += '<div class="card">';
+        html += '<div class="section-header">Schedule</div>';
         html += '<p class="muted" style="margin-top:0;">How often does this class meet?</p>';
         html += '<select id="schedule-select" style="width:100%; max-width:340px;">';
         SCHEDULE_OPTIONS.forEach(s => {
@@ -1128,7 +1248,6 @@
 
         html += '<div class="card">';
         html += '<div class="section-header">Students to pick per period</div>';
-        html += '<p class="muted" style="margin-top:0;">How many students should be randomly selected each time you tap "Pick" for this class?</p>';
         html += '<div style="display:flex; align-items:center; gap:14px; margin: 10px 0; flex-wrap:wrap;">';
         html += '<div class="stepper">';
         html += '<button id="pick-minus" '+((c.pickCount||1) <= 1 ? 'disabled' : '')+'>\u2212</button>';
@@ -1145,37 +1264,45 @@
           let frequencyClass = 'coverage-good';
           let frequencyLabel = '';
           if (freq.perStudentPerWeek < 0.8) { frequencyClass = 'coverage-low'; frequencyLabel = ' (below research target)'; }
-          else if (freq.perStudentPerWeek > 3.5) { frequencyClass = 'coverage-high'; frequencyLabel = ' (more than research suggests is needed)'; }
-          else { frequencyLabel = ' (matches research target of 2\u20133/week)'; }
+          else if (freq.perStudentPerWeek > 3.5) { frequencyClass = 'coverage-high'; frequencyLabel = ' (more than research suggests)'; }
+          else { frequencyLabel = ' (matches research target)'; }
           const perWeek = freq.perStudentPerWeek.toFixed(1);
           const weeksB = freq.weeksBetween.toFixed(1);
           html += '<div class="coverage-readout">';
           html += '<strong>What this means:</strong><br>';
-          html += '\u{1F4CA} About <strong>'+freq.snapshotsPerWeek.toFixed(1)+'</strong> snapshots per week from this class<br>';
+          html += '\u{1F4CA} About <strong>'+freq.snapshotsPerWeek.toFixed(1)+'</strong> snapshots per week<br>';
           html += '\u{1F464} Each student observed roughly <span class="'+frequencyClass+'">'+perWeek+'\u00D7/week</span>'+frequencyLabel+'<br>';
-          html += '\u{1F551} Average gap between snapshots: <strong>'+weeksB+' week'+(weeksB==='1.0'?'':'s')+'</strong>';
+          html += '\u{1F551} Average gap: <strong>'+weeksB+' week'+(weeksB==='1.0'?'':'s')+'</strong>';
           html += '</div>';
         }
         html += '</div>';
+
+        html += '<div class="card">';
+        html += '<div class="section-header">Engagement dimensions</div>';
+        html += '<p class="tiny" style="margin-top:0;">The three core dimensions (Behavioral / Cognitive / Emotional) are always on. Add the optional ones if useful.</p>';
+        html += '<label class="toggle-row"><input type="checkbox" id="toggle-social" '+(c.showSocial?'checked':'')+'> <strong>Social</strong> &nbsp; <span class="muted">peer interaction (recommended for K-2, Arts, PE)</span></label>';
+        html += '<label class="toggle-row"><input type="checkbox" id="toggle-agentic" '+(c.showAgentic?'checked':'')+'> <strong>Agentic</strong> &nbsp; <span class="muted">student-initiated direction (recommended for 6-12, Arts)</span></label>';
+        html += '</div>';
+
+        html += '<div class="card">';
+        html += '<div class="section-header">Class actions</div>';
+        html += '<div style="display:flex; gap:8px; flex-wrap:wrap;">';
+        html += '<button class="btn small" id="rename-class">Rename class</button>';
+        html += '<button class="btn small danger" id="delete-class">Delete class</button>';
+        html += '</div>';
+        html += '</div>';
       }
-
-      html += '<div class="card">';
-      html += '<div class="section-header">Dimensions</div>';
-      html += '<label class="toggle-row"><input type="checkbox" id="toggle-social" '+(state.showSocial?'checked':'')+'> Show <strong>&nbsp;Social engagement&nbsp;</strong> as a 4th dimension</label>';
-      html += '<p class="tiny" style="margin-top:6px;">Behavioral, cognitive, and emotional engagement are the three core research dimensions. Social engagement is a sometimes-included fourth.</p>';
-      html += '</div>';
-
       html += '<div class="card">';
       html += '<div class="section-header">About this app</div>';
-      html += '<p class="tiny">This tool follows the research practice of <strong>anecdotal records</strong>. Best practices:</p>';
+      html += '<p class="tiny">Based on the research practice of <strong>anecdotal records</strong>. Engagement framework: Fredricks/Appleton three-factor model (Behavioral, Cognitive, Emotional), extended with Social and Agentic dimensions (Reeve & Tseng) for older grades and arts.</p>';
       html += '<ul class="tip-list">';
       html += '<li>Write close to the moment of observation</li>';
       html += '<li>Describe what you saw or heard, not what you inferred</li>';
       html += '<li>Avoid deficit-framed language</li>';
-      html += '<li>Aim for 2\u20133 observations per student per week</li>';
+      html += '<li>Aim for ~1 snapshot per student per week</li>';
       html += '<li>Balance strengths with growth areas</li>';
       html += '</ul>';
-      html += '<p class="tiny" style="margin-top:10px;">All data stays on this device. Use Export to download backups regularly.</p>';
+      html += '<p class="tiny" style="margin-top:10px;">All data stays on this device. Use Export \u2192 Download backup regularly.</p>';
       html += '</div>';
       return html;
     }
@@ -1187,14 +1314,27 @@
       let html = '<div class="modal-overlay" id="modal-overlay"><div class="modal">';
       html += '<h3>'+escapeHtml(m.title)+'</h3>';
       if (m.type === 'addClass'){
-        html += '<p class="muted" style="margin-top:0;">e.g. "Period 3 \u2014 English 9"</p>';
-        html += '<input type="text" class="input-text" id="modal-name" value="'+escapeAttr(m.nameValue)+'" placeholder="Class name" autofocus>';
-        html += '<div style="margin-top:14px;"><div class="section-header" style="margin-top:0;">Schedule</div>';
+        html += '<div class="form-row"><label>Class name</label>';
+        html += '<input type="text" class="input-text" id="modal-name" value="'+escapeAttr(m.nameValue)+'" placeholder="e.g. Period 3 \u2014 English 9" autofocus></div>';
+        html += '<div class="form-row"><label>Grade band</label>';
+        html += '<select id="modal-grade" style="width:100%;">';
+        GRADE_BANDS.forEach(g => {
+          html += '<option value="'+g.key+'" '+(m.gradeBand===g.key?'selected':'')+'>'+escapeHtml(g.label)+'</option>';
+        });
+        html += '</select></div>';
+        html += '<div class="form-row"><label>Subject area</label>';
+        html += '<select id="modal-subject" style="width:100%;">';
+        SUBJECTS.forEach(s => {
+          html += '<option value="'+s.key+'" '+(m.subject===s.key?'selected':'')+'>'+escapeHtml(s.label)+'</option>';
+        });
+        html += '</select></div>';
+        html += '<div class="form-row"><label>Schedule</label>';
         html += '<select id="modal-schedule" style="width:100%;">';
         SCHEDULE_OPTIONS.forEach(s => {
           html += '<option value="'+s.key+'" '+(m.scheduleKey===s.key?'selected':'')+'>'+escapeHtml(s.label)+'</option>';
         });
         html += '</select></div>';
+        html += '<p class="tiny">These choices customize the rating wording, tag library, and writing prompts. Changeable later in Settings.</p>';
         html += '<div class="modal-actions">';
         html += '<button class="btn" id="modal-cancel">Cancel</button>';
         html += '<button class="btn primary" id="modal-submit">Create class</button>';
@@ -1248,6 +1388,10 @@
         nameInput.oninput = (e) => { state.modal.nameValue = e.target.value; };
         setTimeout(() => nameInput.focus(), 50);
       }
+      const gradeSel = document.getElementById('modal-grade');
+      if (gradeSel) gradeSel.onchange = (e) => { state.modal.gradeBand = e.target.value; };
+      const subjectSel = document.getElementById('modal-subject');
+      if (subjectSel) subjectSel.onchange = (e) => { state.modal.subject = e.target.value; };
       const schedSel = document.getElementById('modal-schedule');
       if (schedSel) schedSel.onchange = (e) => { state.modal.scheduleKey = e.target.value; };
       const submit = document.getElementById('modal-submit');
@@ -1302,9 +1446,15 @@
 
       const sel = document.getElementById('schedule-select');
       if (sel) sel.onchange = () => changeSchedule(sel.value);
+      const gsel = document.getElementById('grade-select');
+      if (gsel) gsel.onchange = () => changeGradeBand(gsel.value);
+      const subsel = document.getElementById('subject-select');
+      if (subsel) subsel.onchange = () => changeSubject(subsel.value);
 
       const ts = document.getElementById('toggle-social');
-      if (ts) ts.onchange = () => { state.showSocial = ts.checked; saveState(); render(); };
+      if (ts) ts.onchange = () => toggleDimension('social');
+      const ta = document.getElementById('toggle-agentic');
+      if (ta) ta.onchange = () => toggleDimension('agentic');
 
       const importBtn = document.getElementById('import-backup');
       if (importBtn) importBtn.onchange = (e) => { if (e.target.files[0]) importBackup(e.target.files[0]); };
@@ -1321,13 +1471,11 @@
       root.querySelectorAll('[data-remove-student]').forEach(el => el.onclick = () => removeStudent(el.dataset.removeStudent));
     }
 
-    // Register service worker for offline support
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./service-worker.js').catch(err => console.log('SW registration failed:', err));
       });
     }
-
     loadState();
   })();
   </script>
