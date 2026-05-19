@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0F6E56">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Snapshots">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="icon" href="icon-192.png">
+  <title>Classroom Snapshots</title>
+  <style>
+    :root {
+      --color-primary: #0F6E56;
+      --color-primary-dark: #085041;
+      --color-accent: #185FA5;
+      --color-accent-dark: #0C447C;
+      --color-bg: #FAFAF8;
+      --color-surface: #FFFFFF;
+      --color-surface-alt: #F1EFE8;
+      --color-text: #2C2C2A;
+      --color-text-secondary: #5F5E5A;
+      --color-text-tertiary: #888780;
+      --color-border: rgba(0,0,0,0.10);
+      --color-border-strong: rgba(0,0,0,0.20);
+      --color-success-bg: #EAF3DE;
+      --color-success-text: #27500A;
+      --color-success-border: #639922;
+      --color-warning-bg: #FAEEDA;
+      --color-warning-text: #633806;
+      --color-warning-border: #BA7517;
+      --color-danger-bg: #FCEBEB;
+      --color-danger-text: #791F1F;
+      --color-danger-border: #A32D2D;
+      --color-info-bg: #E6F1FB;
+      --color-info-text: #042C53;
+      --color-info-border: #378ADD;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg: #1A1A19;
+        --color-surface: #2C2C2A;
+        --color-surface-alt: #3C3B38;
+        --color-text: #F1EFE8;
+        --color-text-secondary: #B4B2A9;
+        --color-text-tertiary: #888780;
+        --color-border: rgba(255,255,255,0.10);
+        --color-border-strong: rgba(255,255,255,0.20);
+      }
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior-y: contain;
+    }
+    body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: env(safe-area-inset-top, 0) max(16px, env(safe-area-inset-right)) env(safe-area-inset-bottom, 16px) max(16px, env(safe-area-inset-left));
+    }
+    .hero {
+      background: linear-gradient(135deg, #0F6E56 0%, #185FA5 100%);
+      color: white;
+      border-radius: var(--radius-lg);
+      padding: 18px 22px;
+      margin: 12px 0 14px 0;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .hero h1 { margin: 0; font-size: 20px; font-weight: 600; }
+    .hero p { margin: 2px 0 0 0; font-size: 13px; opacity: 0.85; }
+
+    .class-bar {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin-bottom: 14px;
+      padding: 8px;
+      background: var(--color-surface-alt);
+      border-radius: var(--radius-lg);
+    }
+    .class-tab {
+      padding: 9px 14px;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 14px;
+      background: transparent;
+      border: 1px solid transparent;
+      user-select: none;
+      transition: all 0.15s;
+      min-height: 38px;
+      display: flex; align-items: center;
+    }
+    .class-tab:hover { background: var(--color-surface); }
+    .class-tab.active {
+      background: var(--color-surface);
+      border-color: var(--color-border-strong);
+      font-weight: 600;
+      color: var(--color-primary);
+    }
+
+    .view-tabs {
+      display: flex; gap: 4px;
+      margin: 6px 0 16px 0;
+      border-bottom: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+    .view-tab {
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+      border-bottom: 2px solid transparent;
+      user-select: none;
+      color: var(--color-text-secondary);
+      display: inline-flex; align-items: center; gap: 6px;
+      min-height: 44px;
+      transition: all 0.15s;
+      margin-bottom: -1px;
+    }
+    .view-tab:hover { color: var(--color-text); }
+    .view-tab.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      font-weight: 600;
+    }
+    .view-tab .icon { width: 18px; height: 18px; display: inline-block; }
+
+    .btn {
+      padding: 10px 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-surface);
+      cursor: pointer;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--color-text);
+      min-height: 44px;
+      transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-weight: 500;
+    }
+    .btn:hover { background: var(--color-surface-alt); }
+    .btn:active { transform: scale(0.97); }
+    .btn.primary { background: var(--color-primary); color: white; border-color: var(--color-primary); }
+    .btn.primary:hover { background: var(--color-primary-dark); }
+    .btn.accent { background: var(--color-accent); color: white; border-color: var(--color-accent); }
+    .btn.accent:hover { background: var(--color-accent-dark); }
+    .btn.danger { color: var(--color-danger-text); }
+    .btn.small { padding: 6px 12px; font-size: 13px; min-height: 36px; }
+    .btn.large { padding: 14px 22px; font-size: 16px; min-height: 52px; }
+
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .card.student-card { border-left: 4px solid var(--color-primary); }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--color-text-secondary);
+      background: var(--color-surface-alt);
+      border-radius: var(--radius-lg);
+    }
+    .empty-state .big-icon { font-size: 48px; color: var(--color-text-tertiary); margin-bottom: 8px; }
+
+    .toast {
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      background: var(--color-success-bg);
+      color: var(--color-success-text);
+      font-size: 14px;
+      margin: 10px 0;
+      border-left: 4px solid var(--color-success-border);
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .section-header {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-tertiary);
+      margin: 14px 0 8px 0;
+      font-weight: 600;
+    }
+    .rating-row { display: flex; align-items: center; gap: 10px; margin: 8px 0; flex-wrap: wrap; }
+    .rating-label {
+      font-size: 13px;
+      min-width: 130px;
+      color: var(--color-text-secondary);
+      font-weight: 600;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .dim-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px;
+    }
+    .dim-icon.behavioral { background: #E6F1FB; color: #185FA5; }
+    .dim-icon.cognitive { background: #EEEDFE; color: #534AB7; }
+    .dim-icon.emotional { background: #FBEAF0; color: #D4537E; }
+    .dim-icon.social { background: #FAEEDA; color: #BA7517; }
+    .rating-opt {
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--color-border-strong);
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+      background: var(--color-surface);
+      min-height: 36px;
+      display: inline-flex; align-items: center;
+      transition: all 0.12s;
+    }
+    .rating-opt:hover { background: var(--color-surface-alt); }
+    .rating-opt.active {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--color-border-strong);
+      font-size: 13px;
+      cursor: pointer;
+      background: var(--color-surface);
+      user-select: none;
+      min-height: 36px;
+      transition: all 0.12s;
+    }
+    .pill:hover { background: var(--color-surface-alt); }
+    .pill.pos.active { background: var(--color-success-bg); color: var(--color-success-text); border-color: var(--color-success-border); font-weight: 600; }
+    .pill.neg.active { background: var(--color-danger-bg); color: var(--color-danger-text); border-color: var(--color-danger-border); font-weight: 600; }
+    .pill.neu.active { background: var(--color-warning-bg); color: var(--color-warning-text); border-color: var(--color-warning-border); font-weight: 600; }
+
+    textarea {
+      width: 100%; min-height: 90px;
+      padding: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 16px;
+      resize: vertical;
+      font-family: inherit;
+      line-height: 1.5;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(15, 110, 86, 0.15);
+    }
+
+    .prompt-box {
+      background: linear-gradient(135deg, #FAEEDA 0%, #FBEAF0 100%);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin: 12px 0;
+      border-left: 4px solid #BA7517;
+    }
+    .prompt-box .ptitle {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #633806;
+      margin-bottom: 6px;
+      font-weight: 700;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .prompt-box .pbody { color: #4A1B0C; font-size: 14px; line-height: 1.5; }
+    .prompt-box .pnext {
+      margin-top: 8px; cursor: pointer;
+      color: var(--color-accent);
+      font-size: 12px; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+
+    .help-callout {
+      background: var(--color-info-bg);
+      color: var(--color-info-text);
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 13px;
+      margin: 8px 0 14px 0;
+      border-left: 4px solid var(--color-info-border);
+      line-height: 1.5;
+    }
+    .help-callout strong { color: #0C447C; }
+
+    .snapshot {
+      border-left: 4px solid var(--color-accent);
+      padding: 12px 16px;
+      background: var(--color-surface-alt);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      margin: 10px 0;
+    }
+    .tag-small {
+      display: inline-block;
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      margin: 2px 4px 2px 0;
+      font-weight: 600;
+    }
+    .tag-small.pos { background: var(--color-success-bg); color: var(--color-success-text); }
+    .tag-small.neg { background: var(--color-danger-bg); color: var(--color-danger-text); }
+    .tag-small.neu { background: var(--color-warning-bg); color: var(--color-warning-text); }
+    .tag-small.dim { font-family: monospace; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 14px 0;
+    }
+    .stat-card { padding: 14px 16px; border-radius: var(--radius-md); color: white; }
+    .stat-card.teal { background: #0F6E56; }
+    .stat-card.blue { background: #185FA5; }
+    .stat-card.amber { background: #BA7517; }
+    .stat-card.purple { background: #534AB7; }
+    .stat-num { font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+    .stat-lbl { font-size: 12px; opacity: 0.9; }
+
+    .student-row {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.12s;
+    }
+    .student-row:hover { border-color: var(--color-border-strong); }
+    .student-row.clickable { cursor: pointer; }
+    .student-row.clickable:hover { background: var(--color-surface-alt); }
+    .avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: white;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+    .avatar.c1 { background: #0F6E56; }
+    .avatar.c2 { background: #185FA5; }
+    .avatar.c3 { background: #534AB7; }
+    .avatar.c4 { background: #BA7517; }
+    .avatar.c5 { background: #D4537E; }
+    .avatar.c6 { background: #5F5E5A; }
+
+    .muted { color: var(--color-text-secondary); font-size: 13px; }
+    .tiny { font-size: 12px; color: var(--color-text-tertiary); }
+    h3 { margin: 0 0 12px 0; font-size: 17px; }
+
+    .toggle-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px;
+      margin: 8px 0;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+    .toggle-row input { width: 20px; height: 20px; margin: 0; cursor: pointer; }
+
+    .stepper {
+      display: inline-flex; align-items: center; gap: 0;
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .stepper button {
+      background: var(--color-surface);
+      border: none;
+      width: 40px; height: 40px;
+      cursor: pointer;
+      font-size: 20px;
+      color: var(--color-text);
+      font-family: inherit;
+    }
+    .stepper button:hover { background: var(--color-surface-alt); }
+    .stepper button:disabled { color: var(--color-text-tertiary); cursor: not-allowed; }
+    .stepper .stepper-val {
+      min-width: 44px;
+      text-align: center;
+      font-size: 16px; font-weight: 700;
+      padding: 0 6px;
+      border-left: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+      line-height: 40px;
+    }
+
+    select {
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 14px;
+      font-family: inherit;
+      min-height: 44px;
+      cursor: pointer;
+    }
+
+    .pick-cta {
+      background: linear-gradient(135deg, #EAF3DE 0%, #E1F5EE 100%);
+      border-radius: var(--radius-lg);
+      padding: 32px 24px;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .pick-cta h2 {
+      margin: 0 0 6px 0;
+      font-size: 22px;
+      color: #173404;
+      font-weight: 700;
+    }
+    .pick-cta p { margin: 0 0 18px 0; color: #27500A; font-size: 14px; }
+
+    .coverage-readout {
+      background: var(--color-surface-alt);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      margin: 10px 0;
+      font-size: 13px;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+    .coverage-readout strong { color: var(--color-text); font-weight: 600; }
+    .coverage-good { color: #27500A; font-weight: 700; }
+    .coverage-low { color: #BA7517; font-weight: 700; }
+    .coverage-high { color: #185FA5; font-weight: 700; }
+
+    ul.tip-list { margin: 8px 0 0 0; padding-left: 20px; }
+    ul.tip-list li { margin: 4px 0; font-size: 13px; color: var(--color-text-secondary); }
+
+    details summary { outline: none; cursor: pointer; }
+    .input-text {
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border-strong);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 16px;
+      font-family: inherit;
+      width: 100%;
+      min-height: 44px;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 20px;
+    }
+    .modal {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    }
+    .modal h3 { margin-top: 0; }
+    .modal-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .install-hint {
+      background: var(--color-info-bg);
+      color: var(--color-info-text);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      line-height: 1.5;
+      border-left: 4px solid var(--color-info-border);
+    }
+
+    @supports (-webkit-touch-callout: none) {
+      /* iOS-specific tweaks */
+      input, textarea, select { font-size: 16px; } /* prevents zoom on focus */
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="view-root"></div>
+  </div>
+  <div id="modal-root"></div>
+
+  <script>
+  (function(){
+    const RATINGS = [
+      {key:'behavioral', label:'Behavioral', icon:'\u26A1', help:'On-task actions, participation', opts:['off-task','low','moderate','active','very active']},
+      {key:'cognitive', label:'Cognitive', icon:'\u{1F9E0}', help:'Thinking deeply, asking questions', opts:['surface','developing','solid','strong','high-level']},
+      {key:'emotional', label:'Emotional', icon:'\u{1F642}', help:'Affect & interest', opts:['withdrawn','flat','positive','engaged','enthusiastic']},
+      {key:'social', label:'Social', icon:'\u{1F465}', help:'Interaction with peers', opts:['isolated','minimal','cooperative','collaborative','leading']}
+    ];
+
+    const POS_TAGS = ['asked a question','contributed in discussion','helped a peer','connected to prior learning','showed persistence','tried a new strategy','led group work','visible growth'];
+    const NEU_TAGS = ['quiet today','first time speaking','returned after absence','seemed tired','asked for help'];
+    const NEG_TAGS = ['looked away during instruction','side conversation','work not started','put head down','left seat repeatedly'];
+
+    const PROMPT_GROUPS = [
+      { group: 'Describe what you saw', icon: '\u{1F441}', prompts: [
+        "What did this student say or do specifically? Quote them if possible.",
+        "What did their body language or actions show during the lesson?",
+        "What did their work today look like \u2014 what did they produce or attempt?"
+      ]},
+      { group: 'ABC framework', icon: '\u21C4', prompts: [
+        "Antecedent \u2192 Behavior \u2192 Consequence: What came before, what did the student do, what happened after?",
+        "Was there a specific trigger or moment that changed how they engaged today?"
+      ]},
+      { group: 'Strengths-first lens', icon: '\u2728', prompts: [
+        "What is one thing this student is doing well right now?",
+        "What did they try today, even if it didn't fully land?",
+        "What growth have you noticed in this student over the past few weeks?"
+      ]},
+      { group: 'Report-card evidence', icon: '\u{1F4CB}', prompts: [
+        "What's one specific moment from today you'd cite at conferences?",
+        "What feedback would help this student grow next class?",
+        "What would you want a parent to know about today?"
+      ]}
+    ];
+    const ALL_PROMPTS = PROMPT_GROUPS.flatMap(g => g.prompts.map(p => ({group: g.group, icon: g.icon, text: p})));
+
+    const SCHEDULE_OPTIONS = [
+      {key:'daily-5', label:'Daily (5\u00D7/week)', meetings: 5},
+      {key:'block-3', label:'Block A/B (3\u00D7/week)', meetings: 3},
+      {key:'block-25', label:'Block A/B (avg 2.5\u00D7/week)', meetings: 2.5},
+      {key:'block-2', label:'Block A/B (2\u00D7/week)', meetings: 2},
+      {key:'weekly', label:'Weekly (1\u00D7/week)', meetings: 1}
+    ];
+
+    const STORAGE_KEY = 'classroom-snapshots-v1';
+
+    const state = {
+      classes: [],
+      activeClassId: null,
+      view: 'capture',
+      captureDraft: null,
+      selectedStudentDetail: null,
+      toast: null,
+      promptIndex: 0,
+      showSocial: false,
+      modal: null
+    };
+
+    function recommendedPickCount(numStudents, meetingsPerWeek){
+      if (numStudents <= 0) return 1;
+      if (!meetingsPerWeek || meetingsPerWeek <= 0) meetingsPerWeek = 2.5;
+      return Math.max(1, Math.min(numStudents, Math.ceil(numStudents / meetingsPerWeek)));
+    }
+
+    function studentFrequency(numStudents, pickCount, meetingsPerWeek){
+      if (numStudents <= 0 || pickCount <= 0) return null;
+      const snapshotsPerWeek = pickCount * meetingsPerWeek;
+      const perStudentPerWeek = snapshotsPerWeek / numStudents;
+      const weeksBetween = perStudentPerWeek > 0 ? 1 / perStudentPerWeek : 0;
+      return { perStudentPerWeek, weeksBetween, snapshotsPerWeek };
+    }
+
+    function loadState(){
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw){
+          const parsed = JSON.parse(raw);
+          state.classes = parsed.classes || [];
+          state.activeClassId = parsed.activeClassId || (state.classes[0] && state.classes[0].id) || null;
+          state.showSocial = !!parsed.showSocial;
+        }
+      } catch(e){ console.error('Load failed', e); }
+      state.classes.forEach(c => {
+        if (!c.scheduleKey) c.scheduleKey = 'block-25';
+        const sched = SCHEDULE_OPTIONS.find(s => s.key === c.scheduleKey) || SCHEDULE_OPTIONS[2];
+        if (typeof c.pickCount !== 'number') c.pickCount = recommendedPickCount(c.students.length, sched.meetings);
+      });
+      render();
+    }
+
+    function saveState(){
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          classes: state.classes,
+          activeClassId: state.activeClassId,
+          showSocial: state.showSocial
+        }));
+      } catch(e){ console.error('Save failed', e); showToast('Save failed \u2014 check device storage.'); }
+    }
+
+    function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+    function activeClass(){ return state.classes.find(c => c.id === state.activeClassId); }
+    function showToast(msg){ state.toast = msg; render(); setTimeout(()=>{state.toast=null; render();}, 2800); }
+    function shuffle(arr){ const a = arr.slice(); for (let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; } return a; }
+    function avatarColor(name){ const colors=['c1','c2','c3','c4','c5','c6']; let h=0; for(let i=0;i<name.length;i++) h=(h+name.charCodeAt(i))%colors.length; return colors[h]; }
+    function initials(name){ return name.trim().split(/\s+/).slice(0,2).map(w=>w[0]||'').join('').toUpperCase() || '?'; }
+    function tagClass(tag){ if (POS_TAGS.includes(tag)) return 'pos'; if (NEG_TAGS.includes(tag)) return 'neg'; return 'neu'; }
+    function classMeetings(c){ const s = SCHEDULE_OPTIONS.find(s => s.key === c.scheduleKey); return s ? s.meetings : 2.5; }
+
+    function rollStudents(n){
+      const c = activeClass(); if (!c) return [];
+      if (c.students.length === 0) return [];
+      n = Math.min(n, c.students.length);
+      return shuffle(c.students).slice(0, n).map(s => s.id);
+    }
+
+    function startCapture(){
+      const c = activeClass(); if (!c) return;
+      if (c.students.length === 0){ showToast('Add students first.'); return; }
+      const n = Math.min(c.pickCount || recommendedPickCount(c.students.length, classMeetings(c)), c.students.length);
+      state.captureDraft = { selectedStudentIds: rollStudents(n), perStudent: {} };
+      state.captureDraft.selectedStudentIds.forEach(sid => { state.captureDraft.perStudent[sid] = { ratings:{}, tags:[], note:'' }; });
+      state.promptIndex = Math.floor(Math.random()*ALL_PROMPTS.length);
+      render();
+    }
+
+    function rerollOne(sid){
+      const c = activeClass(); if (!c) return;
+      const cd = state.captureDraft;
+      const remaining = c.students.filter(s => !cd.selectedStudentIds.includes(s.id));
+      if (remaining.length === 0){ showToast('No other students available.'); return; }
+      const pick = remaining[Math.floor(Math.random()*remaining.length)];
+      const idx = cd.selectedStudentIds.indexOf(sid);
+      cd.selectedStudentIds[idx] = pick.id;
+      delete cd.perStudent[sid];
+      cd.perStudent[pick.id] = { ratings:{}, tags:[], note:'' };
+      render();
+    }
+    function removeOne(sid){
+      syncDraftNotes();
+      const cd = state.captureDraft;
+      cd.selectedStudentIds = cd.selectedStudentIds.filter(x => x !== sid);
+      delete cd.perStudent[sid];
+      render();
+    }
+    function addOverride(){
+      const c = activeClass(); if (!c) return;
+      const cd = state.captureDraft;
+      if (cd.selectedStudentIds.length >= 8){ showToast('Maximum 8 per period.'); return; }
+      const available = c.students.filter(s => !cd.selectedStudentIds.includes(s.id));
+      if (available.length === 0){ showToast('All students already selected.'); return; }
+      openPickStudentModal(available, (sid) => {
+        syncDraftNotes();
+        cd.selectedStudentIds.push(sid);
+        cd.perStudent[sid] = { ratings:{}, tags:[], note:'' };
+        closeModal();
+        render();
+      });
+    }
+    function setRating(sid, key, val){ const e = state.captureDraft.perStudent[sid]; if (!e) return; e.ratings[key] = e.ratings[key] === val ? '' : val; render(); }
+    function toggleTag(sid, tag){ const e = state.captureDraft.perStudent[sid]; if (!e) return; const i = e.tags.indexOf(tag); if (i >= 0) e.tags.splice(i,1); else e.tags.push(tag); render(); }
+    function nextPrompt(){ state.promptIndex = (state.promptIndex + 1) % ALL_PROMPTS.length; syncDraftNotes(); render(); }
+
+    function saveSnapshots(){
+      const c = activeClass(); if (!c) return;
+      const cd = state.captureDraft;
+      if (!cd || cd.selectedStudentIds.length === 0){ showToast('No students selected.'); return; }
+      syncDraftNotes();
+      const now = new Date().toISOString();
+      let saved = 0;
+      cd.selectedStudentIds.forEach(sid => {
+        const e = cd.perStudent[sid];
+        const hasContent = (e.note && e.note.trim()) || e.tags.length > 0 || Object.values(e.ratings).some(v => v);
+        if (!hasContent) return;
+        c.snapshots.push({
+          id: uid(), studentId: sid, date: now,
+          ratings: { ...e.ratings }, tags: [...e.tags],
+          note: (e.note || '').trim(),
+          promptUsed: ALL_PROMPTS[state.promptIndex].text
+        });
+        saved++;
+      });
+      if (saved === 0){ showToast('Add a rating, tag, or note before saving.'); return; }
+      state.captureDraft = null;
+      saveState();
+      showToast('Saved ' + saved + ' snapshot' + (saved===1?'':'s') + '.');
+    }
+
+    // ----- Modal helpers -----
+    function openModal(content){ state.modal = content; render(); }
+    function closeModal(){ state.modal = null; render(); }
+
+    function openAddClassModal(){
+      openModal({
+        type: 'addClass',
+        title: 'Add a class',
+        nameValue: '',
+        scheduleKey: 'block-25'
+      });
+    }
+    function openRenameClassModal(){
+      const c = activeClass(); if (!c) return;
+      openModal({ type: 'renameClass', title: 'Rename class', nameValue: c.name });
+    }
+    function openAddStudentModal(){
+      openModal({ type: 'addStudent', title: 'Add student(s)', nameValue: '' });
+    }
+    function openPickStudentModal(available, onPick){
+      openModal({ type: 'pickStudent', title: 'Add a student to this snapshot', available, onPick });
+    }
+    function openConfirmModal(message, onConfirm){
+      openModal({ type: 'confirm', title: 'Are you sure?', message, onConfirm });
+    }
+
+    function submitAddClass(){
+      const name = state.modal.nameValue.trim();
+      if (!name) return;
+      const c = { id: uid(), name, students: [], snapshots: [], pickCount: 1, scheduleKey: state.modal.scheduleKey || 'block-25' };
+      state.classes.push(c);
+      state.activeClassId = c.id;
+      state.captureDraft = null;
+      closeModal();
+      saveState(); render();
+    }
+    function submitRenameClass(){
+      const c = activeClass(); if (!c) return;
+      const name = state.modal.nameValue.trim();
+      if (!name) return;
+      c.name = name;
+      closeModal();
+      saveState(); render();
+    }
+    function submitAddStudent(){
+      const c = activeClass(); if (!c) return;
+      const input = state.modal.nameValue;
+      if (!input || !input.trim()){ closeModal(); return; }
+      const names = input.split(/[,\n]/).map(s=>s.trim()).filter(Boolean);
+      const prevRec = recommendedPickCount(c.students.length, classMeetings(c));
+      names.forEach(n => c.students.push({ id: uid(), name: n }));
+      if (c.pickCount === prevRec) c.pickCount = recommendedPickCount(c.students.length, classMeetings(c));
+      closeModal();
+      saveState(); render();
+    }
+    function deleteClass(){
+      const c = activeClass(); if (!c) return;
+      openConfirmModal('Delete "' + c.name + '" and all its snapshots?', () => {
+        state.classes = state.classes.filter(x => x.id !== c.id);
+        state.activeClassId = state.classes[0] && state.classes[0].id || null;
+        state.captureDraft = null;
+        closeModal();
+        saveState(); render();
+      });
+    }
+    function removeStudent(sid){
+      const c = activeClass(); if (!c) return;
+      const s = c.students.find(x => x.id === sid); if (!s) return;
+      openConfirmModal('Remove ' + s.name + '?', () => {
+        c.students = c.students.filter(x => x.id !== sid);
+        closeModal();
+        saveState(); render();
+      });
+    }
+    function deleteSnapshot(snapId){
+      openConfirmModal('Delete this snapshot?', () => {
+        const c = activeClass(); if (!c) return;
+        c.snapshots = c.snapshots.filter(s => s.id !== snapId);
+        closeModal();
+        saveState(); render();
+      });
+    }
+    function cancelCapture(){
+      openConfirmModal('Discard this snapshot?', () => {
+        state.captureDraft = null;
+        closeModal();
+        render();
+      });
+    }
+
+    function adjustPickCount(delta){
+      const c = activeClass(); if (!c) return;
+      c.pickCount = Math.max(1, Math.min(c.students.length || 1, (c.pickCount || 1) + delta));
+      saveState(); render();
+    }
+    function changeSchedule(key){
+      const c = activeClass(); if (!c) return;
+      c.scheduleKey = key;
+      saveState(); render();
+    }
+    function applyRecommendation(){
+      const c = activeClass(); if (!c) return;
+      c.pickCount = recommendedPickCount(c.students.length, classMeetings(c));
+      saveState(); render();
+    }
+
+    function csvEscape(s){ if (s === null || s === undefined) return ''; const str = String(s); if (str.includes('"') || str.includes(',') || str.includes('\n')) return '"'+str.replace(/"/g,'""')+'"'; return str; }
+    function exportCSV(scope){
+      const rows = [['date','class','student','behavioral','cognitive','emotional','social','tags','note','prompt_used']];
+      const classes = scope === 'all' ? state.classes : [activeClass()].filter(Boolean);
+      classes.forEach(c => {
+        c.snapshots.forEach(sn => {
+          const name = (c.students.find(s=>s.id===sn.studentId)||{}).name || '(removed)';
+          rows.push([sn.date, c.name, name, sn.ratings.behavioral||'', sn.ratings.cognitive||'', sn.ratings.emotional||'', sn.ratings.social||'', sn.tags.join('; '), sn.note, sn.promptUsed||'']);
+        });
+      });
+      if (rows.length === 1){ showToast('No snapshots to export yet.'); return; }
+      const csv = rows.map(r => r.map(csvEscape).join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'classroom_snapshots_'+new Date().toISOString().slice(0,10)+'.csv';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Exported ' + (rows.length-1) + ' snapshot' + (rows.length-1===1?'':'s') + '.');
+    }
+
+    function exportBackup(){
+      const data = { exportedAt: new Date().toISOString(), version: 'v1', classes: state.classes, showSocial: state.showSocial };
+      const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'snapshots_backup_'+new Date().toISOString().slice(0,10)+'.json';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast('Backup file downloaded.');
+    }
+
+    function importBackup(file){
+      const reader = new FileReader();
+      reader.onload = e => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (!data.classes) throw new Error('Invalid backup file');
+          openConfirmModal('Replace all current data with the backup? This cannot be undone.', () => {
+            state.classes = data.classes;
+            state.showSocial = !!data.showSocial;
+            state.activeClassId = state.classes[0] && state.classes[0].id || null;
+            closeModal();
+            saveState();
+            showToast('Backup restored.');
+            render();
+          });
+        } catch(err){ showToast('Could not read backup file.'); }
+      };
+      reader.readAsText(file);
+    }
+
+    // ----- Render -----
+    function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+    function escapeAttr(s){ return escapeHtml(s); }
+
+    function syncDraftNotes(){
+      if (!state.captureDraft) return;
+      state.captureDraft.selectedStudentIds.forEach(sid => {
+        const ta = document.getElementById('note-'+sid);
+        if (ta && state.captureDraft.perStudent[sid]) state.captureDraft.perStudent[sid].note = ta.value;
+      });
+    }
+
+    function render(){
+      const root = document.getElementById('view-root');
+      const c = activeClass();
+      let html = '';
+
+      html += '<div class="hero">';
+      html += '<div class="hero-icon">\u{1F4DA}</div>';
+      html += '<div><h1>Classroom snapshots</h1><p>Capture quick post-class observations \u2014 feed them into term-end comments</p></div>';
+      html += '</div>';
+
+      html += '<div class="class-bar">';
+      if (state.classes.length === 0){
+        html += '<span class="muted" style="padding: 0 6px;">No classes yet \u2014</span>';
+      } else {
+        state.classes.forEach(cl => {
+          const active = cl.id === state.activeClassId ? 'active' : '';
+          html += '<div class="class-tab '+active+'" data-class="'+cl.id+'">'+escapeHtml(cl.name)+'</div>';
+        });
+      }
+      html += '<button class="btn small" id="add-class">+ Add class</button>';
+      if (c){
+        html += '<button class="btn small" id="rename-class">Rename</button>';
+        html += '<button class="btn small danger" id="delete-class">Delete</button>';
+      }
+      html += '</div>';
+
+      if (state.toast) html += '<div class="toast">\u2713 '+escapeHtml(state.toast)+'</div>';
+
+      if (!c){
+        html += '<div class="empty-state"><div class="big-icon">\u{1F3EB}</div><p style="font-size:15px; margin: 0 0 14px 0;">Add your first class to get started.</p><button class="btn primary" id="add-class-empty">+ Create a class</button></div>';
+        root.innerHTML = html;
+        renderModal();
+        wire();
+        return;
+      }
+
+      html += '<div class="view-tabs">';
+      html += '<div class="view-tab '+(state.view==='capture'?'active':'')+'" data-view="capture">\u{1F4F8} Capture</div>';
+      html += '<div class="view-tab '+(state.view==='students'?'active':'')+'" data-view="students">\u{1F465} Students</div>';
+      html += '<div class="view-tab '+(state.view==='roster'?'active':'')+'" data-view="roster">\u{1F4DC} Roster</div>';
+      html += '<div class="view-tab '+(state.view==='export'?'active':'')+'" data-view="export">\u{2B07} Export</div>';
+      html += '<div class="view-tab '+(state.view==='settings'?'active':'')+'" data-view="settings">\u2699 Settings</div>';
+      html += '</div>';
+
+      if (state.view === 'capture') html += renderCapture(c);
+      else if (state.view === 'students') html += renderStudents(c);
+      else if (state.view === 'roster') html += renderRoster(c);
+      else if (state.view === 'export') html += renderExport(c);
+      else if (state.view === 'settings') html += renderSettings(c);
+
+      root.innerHTML = html;
+      renderModal();
+      wire();
+    }
+
+    function renderCapture(c){
+      let html = '';
+      if (c.students.length === 0){
+        return '<div class="empty-state"><div class="big-icon">\u{1F465}</div><p>No students in this class yet.</p><button class="btn primary" id="goto-roster" style="margin-top:8px;">+ Add students</button></div>';
+      }
+      if (!state.captureDraft){
+        const pc = c.pickCount || recommendedPickCount(c.students.length, classMeetings(c));
+        const rec = recommendedPickCount(c.students.length, classMeetings(c));
+        html += '<div class="pick-cta">';
+        html += '<h2>Ready to capture?</h2>';
+        html += '<p>Pick <strong>'+pc+'</strong> student'+(pc===1?'':'s')+' at random from <strong>'+escapeHtml(c.name)+'</strong> ('+c.students.length+' student'+(c.students.length===1?'':'s')+' total)</p>';
+        html += '<button class="btn primary large" id="start-capture">\u{1F3B2} Pick '+pc+' student'+(pc===1?'':'s')+'</button>';
+        if (pc !== rec){
+          html += '<p class="tiny" style="margin-top:12px; color: #5F5E5A;">Recommended: '+rec+' per period for this schedule. Change in Settings.</p>';
+        }
+        html += '</div>';
+        return html;
+      }
+
+      html += '<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:12px;">';
+      html += '<h3 style="margin:0;">Today\'s snapshot \u00B7 '+state.captureDraft.selectedStudentIds.length+' selected</h3>';
+      html += '<div style="display:flex; gap:6px;">';
+      html += '<button class="btn small" id="add-override">+ Add student</button>';
+      html += '<button class="btn small danger" id="cancel-capture">\u2716 Cancel</button>';
+      html += '</div></div>';
+
+      const p = ALL_PROMPTS[state.promptIndex];
+      html += '<div class="prompt-box">';
+      html += '<div class="ptitle">'+p.icon+' '+escapeHtml(p.group)+'</div>';
+      html += '<div class="pbody">'+escapeHtml(p.text)+'</div>';
+      html += '<div class="pnext" id="next-prompt">\u21BB new prompt</div>';
+      html += '</div>';
+
+      html += '<div class="help-callout"><strong>Tip:</strong> Describe what you <em>saw or heard</em>, not what you assumed. "Looked away three times during instructions" works better than "wasn\'t paying attention."</div>';
+
+      state.captureDraft.selectedStudentIds.forEach(sid => {
+        const s = c.students.find(x => x.id === sid) || {name:'(removed)', id:sid};
+        const e = state.captureDraft.perStudent[sid];
+        html += '<div class="card student-card">';
+        html += '<div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-wrap:wrap; gap:6px;">';
+        html += '<div style="display:flex; align-items:center;"><div class="avatar '+avatarColor(s.name)+'">'+escapeHtml(initials(s.name))+'</div><strong style="font-size:17px;">'+escapeHtml(s.name)+'</strong></div>';
+        html += '<div style="display:flex; gap:6px;">';
+        html += '<button class="btn small" data-reroll="'+sid+'">\u21BB Reroll</button>';
+        html += '<button class="btn small danger" data-remove-from-draft="'+sid+'">\u2716</button>';
+        html += '</div></div>';
+
+        html += '<div class="section-header">Engagement</div>';
+        RATINGS.forEach(r => {
+          if (r.key === 'social' && !state.showSocial) return;
+          html += '<div class="rating-row">';
+          html += '<div class="rating-label"><span class="dim-icon '+r.key+'">'+r.icon+'</span>'+escapeHtml(r.label)+'</div>';
+          r.opts.forEach(opt => {
+            const active = e.ratings[r.key] === opt ? 'active' : '';
+            html += '<span class="rating-opt '+active+'" data-rate="'+sid+'|'+r.key+'|'+escapeAttr(opt)+'">'+escapeHtml(opt)+'</span>';
+          });
+          html += '</div>';
+        });
+
+        html += '<div class="section-header">Observable tags</div>';
+        html += '<div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px;">';
+        POS_TAGS.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill pos '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">+ '+escapeHtml(t)+'</span>'; });
+        NEU_TAGS.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill neu '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">~ '+escapeHtml(t)+'</span>'; });
+        NEG_TAGS.forEach(t => { const a = e.tags.includes(t)?'active':''; html += '<span class="pill neg '+a+'" data-tag="'+sid+'|'+escapeAttr(t)+'">! '+escapeHtml(t)+'</span>'; });
+        html += '</div>';
+
+        html += '<div class="section-header">Note</div>';
+        html += '<textarea id="note-'+sid+'" placeholder="Describe what you observed (specific words, actions, work product)\u2026">'+escapeHtml(e.note||'')+'</textarea>';
+        html += '</div>';
+      });
+
+      if (state.captureDraft.selectedStudentIds.length > 0){
+        html += '<div style="display:flex; gap:8px; margin-top:14px;">';
+        html += '<button class="btn primary large" id="save-snapshots" style="flex:1;">\u{1F4BE} Save snapshots</button>';
+        html += '</div>';
+      }
+      return html;
+    }
+
+    function renderStudents(c){
+      let html = '';
+      if (c.students.length === 0) return '<div class="empty-state"><p>No students yet. Go to Roster to add some.</p></div>';
+      if (state.selectedStudentDetail){
+        const s = c.students.find(x => x.id === state.selectedStudentDetail) || {id:state.selectedStudentDetail, name:'(removed)'};
+        const snaps = c.snapshots.filter(sn => sn.studentId === s.id).sort((a,b)=>b.date.localeCompare(a.date));
+        html += '<div style="display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;">';
+        html += '<button class="btn small" id="back-to-students">\u2190 Back</button>';
+        html += '<div class="avatar '+avatarColor(s.name)+'">'+escapeHtml(initials(s.name))+'</div>';
+        html += '<h3 style="margin:0; flex:1;">'+escapeHtml(s.name)+' <span class="muted" style="font-weight:400;">\u2014 '+snaps.length+' snapshot'+(snaps.length===1?'':'s')+'</span></h3>';
+        html += '</div>';
+        if (snaps.length === 0){
+          html += '<div class="empty-state"><p>No snapshots yet for '+escapeHtml(s.name)+'.</p></div>';
+        } else {
+          snaps.forEach(sn => {
+            html += '<div class="snapshot">';
+            html += '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">';
+            html += '<span class="tiny">\u{1F4C5} '+new Date(sn.date).toLocaleString()+'</span>';
+            html += '<span class="tiny" style="cursor:pointer; color:var(--color-danger-text);" data-del-snap="'+sn.id+'">\u{1F5D1} delete</span>';
+            html += '</div>';
+            const r = Object.entries(sn.ratings).filter(([_,v])=>v);
+            if (r.length){
+              html += '<div style="margin-bottom:6px;">';
+              r.forEach(([k,v]) => { html += '<span class="tag-small dim">'+escapeHtml(k)+': '+escapeHtml(v)+'</span>'; });
+              html += '</div>';
+            }
+            if (sn.tags.length){
+              html += '<div style="margin-bottom:6px;">';
+              sn.tags.forEach(t => { html += '<span class="tag-small '+tagClass(t)+'">'+escapeHtml(t)+'</span>'; });
+              html += '</div>';
+            }
+            if (sn.note) html += '<div style="font-size:14px; margin-top:6px; line-height:1.5;">'+escapeHtml(sn.note)+'</div>';
+            html += '</div>';
+          });
+        }
+        return html;
+      }
+      html += '<h3>Students in '+escapeHtml(c.name)+'</h3>';
+      c.students.forEach(s => {
+        const count = c.snapshots.filter(sn => sn.studentId === s.id).length;
+        html += '<div class="student-row clickable" data-detail="'+s.id+'">';
+        html += '<div style="display:flex; align-items:center;"><div class="avatar '+avatarColor(s.name)+'">'+escapeHtml(initials(s.name))+'</div><strong>'+escapeHtml(s.name)+'</strong></div>';
+        html += '<span class="muted">'+count+' snapshot'+(count===1?'':'s')+' \u203A</span>';
+        html += '</div>';
+      });
+      return html;
+    }
+
+    function renderRoster(c){
+      let html = '<h3>Roster \u2014 '+escapeHtml(c.name)+'</h3>';
+      html += '<p class="muted">'+c.students.length+' student'+(c.students.length===1?'':'s')+'. Use first names or initials for privacy.</p>';
+      html += '<button class="btn primary" id="add-student" style="margin-bottom:14px;">+ Add student(s)</button>';
+      if (c.students.length === 0) return html + '<div class="empty-state"><p>No students yet.</p></div>';
+      c.students.forEach(s => {
+        html += '<div class="student-row">';
+        html += '<div style="display:flex; align-items:center;"><div class="avatar '+avatarColor(s.name)+'">'+escapeHtml(initials(s.name))+'</div><span>'+escapeHtml(s.name)+'</span></div>';
+        html += '<button class="btn small danger" data-remove-student="'+s.id+'">\u{1F5D1} Remove</button>';
+        html += '</div>';
+      });
+      return html;
+    }
+
+    function renderExport(c){
+      const totalSnaps = state.classes.reduce((a,cl) => a + cl.snapshots.length, 0);
+      const classSnaps = c.snapshots.length;
+      const totalStudents = state.classes.reduce((a,cl) => a + cl.students.length, 0);
+      let html = '<h3>Export your snapshots</h3>';
+      html += '<p class="muted">Download a CSV, upload to Google Drive, or feed straight into NotebookLM for trend analysis.</p>';
+      html += '<div class="stat-grid">';
+      html += '<div class="stat-card teal"><div class="stat-num">'+classSnaps+'</div><div class="stat-lbl">In '+escapeHtml(c.name)+'</div></div>';
+      html += '<div class="stat-card blue"><div class="stat-num">'+totalSnaps+'</div><div class="stat-lbl">Across all classes</div></div>';
+      html += '<div class="stat-card purple"><div class="stat-num">'+state.classes.length+'</div><div class="stat-lbl">Classes</div></div>';
+      html += '<div class="stat-card amber"><div class="stat-num">'+totalStudents+'</div><div class="stat-lbl">Total students</div></div>';
+      html += '</div>';
+      html += '<div style="display:flex; gap:10px; flex-wrap:wrap; margin: 12px 0;">';
+      html += '<button class="btn" id="export-class">\u2B07 Export this class (CSV)</button>';
+      html += '<button class="btn accent" id="export-all">\u2B07 Export everything (CSV)</button>';
+      html += '</div>';
+      html += '<div class="card" style="margin-top:14px;">';
+      html += '<div class="section-header">Full backup (JSON)</div>';
+      html += '<p class="tiny" style="margin-top:0;">A backup of all your data, including roster, classes, settings, and notes. Use this to move data to another device or as a safety net.</p>';
+      html += '<div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">';
+      html += '<button class="btn small" id="export-backup">\u2B07 Download backup</button>';
+      html += '<label class="btn small" style="cursor:pointer;">\u2B06 Restore backup<input type="file" id="import-backup" accept=".json,application/json" style="display:none;"></label>';
+      html += '</div>';
+      html += '</div>';
+      html += '<div class="card" style="margin-top:14px;">';
+      html += '<div class="section-header">CSV columns</div>';
+      html += '<p class="tiny">date \u00B7 class \u00B7 student \u00B7 behavioral \u00B7 cognitive \u00B7 emotional \u00B7 social \u00B7 tags \u00B7 note \u00B7 prompt_used</p>';
+      html += '</div>';
+      return html;
+    }
+
+    function renderSettings(c){
+      let html = '<h3>Settings</h3>';
+      if (c){
+        const meetings = classMeetings(c);
+        const rec = recommendedPickCount(c.students.length, meetings);
+        const freq = studentFrequency(c.students.length, c.pickCount || 1, meetings);
+
+        html += '<div class="card">';
+        html += '<div class="section-header">Schedule for '+escapeHtml(c.name)+'</div>';
+        html += '<p class="muted" style="margin-top:0;">How often does this class meet?</p>';
+        html += '<select id="schedule-select" style="width:100%; max-width:340px;">';
+        SCHEDULE_OPTIONS.forEach(s => {
+          html += '<option value="'+s.key+'" '+(c.scheduleKey===s.key?'selected':'')+'>'+escapeHtml(s.label)+'</option>';
+        });
+        html += '</select>';
+        html += '</div>';
+
+        html += '<div class="card">';
+        html += '<div class="section-header">Students to pick per period</div>';
+        html += '<p class="muted" style="margin-top:0;">How many students should be randomly selected each time you tap "Pick" for this class?</p>';
+        html += '<div style="display:flex; align-items:center; gap:14px; margin: 10px 0; flex-wrap:wrap;">';
+        html += '<div class="stepper">';
+        html += '<button id="pick-minus" '+((c.pickCount||1) <= 1 ? 'disabled' : '')+'>\u2212</button>';
+        html += '<div class="stepper-val">'+(c.pickCount||1)+'</div>';
+        html += '<button id="pick-plus" '+((c.pickCount||1) >= c.students.length ? 'disabled' : '')+'>+</button>';
+        html += '</div>';
+        html += '<span class="muted">student'+((c.pickCount||1)===1?'':'s')+' per period</span>';
+        if ((c.pickCount||1) !== rec){
+          html += '<button class="btn small" id="apply-rec">\u2728 Use recommended ('+rec+')</button>';
+        }
+        html += '</div>';
+
+        if (freq && c.students.length > 0){
+          let frequencyClass = 'coverage-good';
+          let frequencyLabel = '';
+          if (freq.perStudentPerWeek < 0.8) { frequencyClass = 'coverage-low'; frequencyLabel = ' (below research target)'; }
+          else if (freq.perStudentPerWeek > 3.5) { frequencyClass = 'coverage-high'; frequencyLabel = ' (more than research suggests is needed)'; }
+          else { frequencyLabel = ' (matches research target of 2\u20133/week)'; }
+          const perWeek = freq.perStudentPerWeek.toFixed(1);
+          const weeksB = freq.weeksBetween.toFixed(1);
+          html += '<div class="coverage-readout">';
+          html += '<strong>What this means:</strong><br>';
+          html += '\u{1F4CA} About <strong>'+freq.snapshotsPerWeek.toFixed(1)+'</strong> snapshots per week from this class<br>';
+          html += '\u{1F464} Each student observed roughly <span class="'+frequencyClass+'">'+perWeek+'\u00D7/week</span>'+frequencyLabel+'<br>';
+          html += '\u{1F551} Average gap between snapshots: <strong>'+weeksB+' week'+(weeksB==='1.0'?'':'s')+'</strong>';
+          html += '</div>';
+        }
+        html += '</div>';
+      }
+
+      html += '<div class="card">';
+      html += '<div class="section-header">Dimensions</div>';
+      html += '<label class="toggle-row"><input type="checkbox" id="toggle-social" '+(state.showSocial?'checked':'')+'> Show <strong>&nbsp;Social engagement&nbsp;</strong> as a 4th dimension</label>';
+      html += '<p class="tiny" style="margin-top:6px;">Behavioral, cognitive, and emotional engagement are the three core research dimensions. Social engagement is a sometimes-included fourth.</p>';
+      html += '</div>';
+
+      html += '<div class="card">';
+      html += '<div class="section-header">About this app</div>';
+      html += '<p class="tiny">This tool follows the research practice of <strong>anecdotal records</strong>. Best practices:</p>';
+      html += '<ul class="tip-list">';
+      html += '<li>Write close to the moment of observation</li>';
+      html += '<li>Describe what you saw or heard, not what you inferred</li>';
+      html += '<li>Avoid deficit-framed language</li>';
+      html += '<li>Aim for 2\u20133 observations per student per week</li>';
+      html += '<li>Balance strengths with growth areas</li>';
+      html += '</ul>';
+      html += '<p class="tiny" style="margin-top:10px;">All data stays on this device. Use Export to download backups regularly.</p>';
+      html += '</div>';
+      return html;
+    }
+
+    function renderModal(){
+      const root = document.getElementById('modal-root');
+      if (!state.modal){ root.innerHTML = ''; return; }
+      const m = state.modal;
+      let html = '<div class="modal-overlay" id="modal-overlay"><div class="modal">';
+      html += '<h3>'+escapeHtml(m.title)+'</h3>';
+      if (m.type === 'addClass'){
+        html += '<p class="muted" style="margin-top:0;">e.g. "Period 3 \u2014 English 9"</p>';
+        html += '<input type="text" class="input-text" id="modal-name" value="'+escapeAttr(m.nameValue)+'" placeholder="Class name" autofocus>';
+        html += '<div style="margin-top:14px;"><div class="section-header" style="margin-top:0;">Schedule</div>';
+        html += '<select id="modal-schedule" style="width:100%;">';
+        SCHEDULE_OPTIONS.forEach(s => {
+          html += '<option value="'+s.key+'" '+(m.scheduleKey===s.key?'selected':'')+'>'+escapeHtml(s.label)+'</option>';
+        });
+        html += '</select></div>';
+        html += '<div class="modal-actions">';
+        html += '<button class="btn" id="modal-cancel">Cancel</button>';
+        html += '<button class="btn primary" id="modal-submit">Create class</button>';
+        html += '</div>';
+      } else if (m.type === 'renameClass'){
+        html += '<input type="text" class="input-text" id="modal-name" value="'+escapeAttr(m.nameValue)+'" autofocus>';
+        html += '<div class="modal-actions">';
+        html += '<button class="btn" id="modal-cancel">Cancel</button>';
+        html += '<button class="btn primary" id="modal-submit">Save</button>';
+        html += '</div>';
+      } else if (m.type === 'addStudent'){
+        html += '<p class="muted" style="margin-top:0;">One name, or many separated by commas or new lines. Use first names or initials for privacy.</p>';
+        html += '<textarea id="modal-name" placeholder="Alex, Bri, Casey\nDana\nElliott" style="min-height: 120px;">'+escapeHtml(m.nameValue)+'</textarea>';
+        html += '<div class="modal-actions">';
+        html += '<button class="btn" id="modal-cancel">Cancel</button>';
+        html += '<button class="btn primary" id="modal-submit">Add</button>';
+        html += '</div>';
+      } else if (m.type === 'pickStudent'){
+        html += '<p class="muted" style="margin-top:0;">Tap a student to add them to today\'s snapshot.</p>';
+        html += '<div style="max-height: 50vh; overflow-y: auto;">';
+        m.available.forEach(s => {
+          html += '<div class="student-row clickable" data-modal-pick="'+s.id+'">';
+          html += '<div style="display:flex; align-items:center;"><div class="avatar '+avatarColor(s.name)+'">'+escapeHtml(initials(s.name))+'</div><strong>'+escapeHtml(s.name)+'</strong></div>';
+          html += '<span class="muted">\u203A</span>';
+          html += '</div>';
+        });
+        html += '</div>';
+        html += '<div class="modal-actions">';
+        html += '<button class="btn" id="modal-cancel">Cancel</button>';
+        html += '</div>';
+      } else if (m.type === 'confirm'){
+        html += '<p>'+escapeHtml(m.message)+'</p>';
+        html += '<div class="modal-actions">';
+        html += '<button class="btn" id="modal-cancel">Cancel</button>';
+        html += '<button class="btn primary" id="modal-confirm">Confirm</button>';
+        html += '</div>';
+      }
+      html += '</div></div>';
+      root.innerHTML = html;
+      wireModal();
+    }
+
+    function wireModal(){
+      const m = state.modal; if (!m) return;
+      const overlay = document.getElementById('modal-overlay');
+      if (overlay) overlay.onclick = (e) => { if (e.target === overlay) closeModal(); };
+      const cancel = document.getElementById('modal-cancel');
+      if (cancel) cancel.onclick = closeModal;
+      const nameInput = document.getElementById('modal-name');
+      if (nameInput) {
+        nameInput.oninput = (e) => { state.modal.nameValue = e.target.value; };
+        setTimeout(() => nameInput.focus(), 50);
+      }
+      const schedSel = document.getElementById('modal-schedule');
+      if (schedSel) schedSel.onchange = (e) => { state.modal.scheduleKey = e.target.value; };
+      const submit = document.getElementById('modal-submit');
+      if (submit){
+        submit.onclick = () => {
+          if (m.type === 'addClass') submitAddClass();
+          else if (m.type === 'renameClass') submitRenameClass();
+          else if (m.type === 'addStudent') submitAddStudent();
+        };
+      }
+      const confirm = document.getElementById('modal-confirm');
+      if (confirm) confirm.onclick = () => m.onConfirm && m.onConfirm();
+      document.querySelectorAll('[data-modal-pick]').forEach(el => {
+        el.onclick = () => m.onPick && m.onPick(el.dataset.modalPick);
+      });
+    }
+
+    function wire(){
+      const root = document.getElementById('view-root');
+      root.querySelectorAll('[data-class]').forEach(el => el.onclick = () => {
+        state.activeClassId = el.dataset.class;
+        state.view = 'capture';
+        state.captureDraft = null;
+        state.selectedStudentDetail = null;
+        saveState(); render();
+      });
+      root.querySelectorAll('[data-view]').forEach(el => el.onclick = () => {
+        syncDraftNotes();
+        state.view = el.dataset.view;
+        state.selectedStudentDetail = null;
+        render();
+      });
+      const bind = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+      bind('add-class', openAddClassModal);
+      bind('add-class-empty', openAddClassModal);
+      bind('rename-class', openRenameClassModal);
+      bind('delete-class', deleteClass);
+      bind('add-student', openAddStudentModal);
+      bind('goto-roster', () => { state.view='roster'; render(); });
+      bind('start-capture', startCapture);
+      bind('cancel-capture', cancelCapture);
+      bind('add-override', addOverride);
+      bind('next-prompt', nextPrompt);
+      bind('save-snapshots', saveSnapshots);
+      bind('back-to-students', () => { state.selectedStudentDetail = null; render(); });
+      bind('export-class', () => exportCSV('class'));
+      bind('export-all', () => exportCSV('all'));
+      bind('export-backup', exportBackup);
+      bind('pick-minus', () => adjustPickCount(-1));
+      bind('pick-plus', () => adjustPickCount(1));
+      bind('apply-rec', applyRecommendation);
+
+      const sel = document.getElementById('schedule-select');
+      if (sel) sel.onchange = () => changeSchedule(sel.value);
+
+      const ts = document.getElementById('toggle-social');
+      if (ts) ts.onchange = () => { state.showSocial = ts.checked; saveState(); render(); };
+
+      const importBtn = document.getElementById('import-backup');
+      if (importBtn) importBtn.onchange = (e) => { if (e.target.files[0]) importBackup(e.target.files[0]); };
+
+      root.querySelectorAll('[data-reroll]').forEach(el => el.onclick = () => { syncDraftNotes(); rerollOne(el.dataset.reroll); });
+      root.querySelectorAll('[data-remove-from-draft]').forEach(el => el.onclick = () => removeOne(el.dataset.removeFromDraft));
+      root.querySelectorAll('[data-rate]').forEach(el => el.onclick = () => { syncDraftNotes(); const [s,k,v] = el.dataset.rate.split('|'); setRating(s,k,v); });
+      root.querySelectorAll('[data-tag]').forEach(el => el.onclick = () => { syncDraftNotes(); const [s,t] = el.dataset.tag.split('|'); toggleTag(s,t); });
+      root.querySelectorAll('textarea[id^="note-"]').forEach(ta => {
+        ta.oninput = () => { if (state.captureDraft && state.captureDraft.perStudent[ta.id.replace('note-','')]) state.captureDraft.perStudent[ta.id.replace('note-','')].note = ta.value; };
+      });
+      root.querySelectorAll('[data-detail]').forEach(el => el.onclick = () => { state.selectedStudentDetail = el.dataset.detail; render(); });
+      root.querySelectorAll('[data-del-snap]').forEach(el => el.onclick = () => deleteSnapshot(el.dataset.delSnap));
+      root.querySelectorAll('[data-remove-student]').forEach(el => el.onclick = () => removeStudent(el.dataset.removeStudent));
+    }
+
+    // Register service worker for offline support
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js').catch(err => console.log('SW registration failed:', err));
+      });
+    }
+
+    loadState();
+  })();
+  </script>
+</body>
+</html>
